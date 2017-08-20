@@ -94,21 +94,20 @@
 
 
 
-<meta name="description" content="sed（stream editor for filtering and transforming text）是一种编辑器，全名是流式编辑器（Stream Editor），可以基于命令来操作数据流中的数据，这些命令要么从命令行中输入，要么保存在文本中。sed每次从输入中读取一行进行处理，并用提供的编辑器命令匹配该数据，按照命令中指定的操作修改数据，将生成的结果输出（stdout）。sed是对文件的行">
+<meta name="description" content="Linux的网络命令 ping ping可以测试计算机名和计算机的 ip 地址,验证与远程计算机的连接,通过将 icmp 回显数据包发送到计算机并侦听回显回复数据包来验证与一台或多台远程计算机的连接,该命令只有在安装了 tcp/ip 协议后才可以使用  NAME    ping, ping6 - send ICMP ECHO_REQUEST to network hosts  SYNOPSIS 格">
 <meta name="keywords" content="命令">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux命令-sed的艺术（一）">
-<meta property="og:url" content="https://seventeenwent.github.io/2017/08/10/Linux命令-sed的艺术（一）/index.html">
+<meta property="og:title" content="Linux命令-网络篇">
+<meta property="og:url" content="https://seventeenwent.github.io/2017/08/20/Linux命令-网络篇/index.html">
 <meta property="og:site_name" content="温涛">
-<meta property="og:description" content="sed（stream editor for filtering and transforming text）是一种编辑器，全名是流式编辑器（Stream Editor），可以基于命令来操作数据流中的数据，这些命令要么从命令行中输入，要么保存在文本中。sed每次从输入中读取一行进行处理，并用提供的编辑器命令匹配该数据，按照命令中指定的操作修改数据，将生成的结果输出（stdout）。sed是对文件的行">
+<meta property="og:description" content="Linux的网络命令 ping ping可以测试计算机名和计算机的 ip 地址,验证与远程计算机的连接,通过将 icmp 回显数据包发送到计算机并侦听回显回复数据包来验证与一台或多台远程计算机的连接,该命令只有在安装了 tcp/ip 协议后才可以使用  NAME    ping, ping6 - send ICMP ECHO_REQUEST to network hosts  SYNOPSIS 格">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://i.imgur.com/mZlkQQJ.png">
-<meta property="og:image" content="http://i.imgur.com/r06J0Ui.png">
-<meta property="og:updated_time" content="2017-08-11T06:11:31.228Z">
+<meta property="og:image" content="https://seventeenwent.github.io/2017/08/20/Linux命令-网络篇/img/ping.gif">
+<meta property="og:updated_time" content="2017-08-20T14:04:23.216Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux命令-sed的艺术（一）">
-<meta name="twitter:description" content="sed（stream editor for filtering and transforming text）是一种编辑器，全名是流式编辑器（Stream Editor），可以基于命令来操作数据流中的数据，这些命令要么从命令行中输入，要么保存在文本中。sed每次从输入中读取一行进行处理，并用提供的编辑器命令匹配该数据，按照命令中指定的操作修改数据，将生成的结果输出（stdout）。sed是对文件的行">
-<meta name="twitter:image" content="http://i.imgur.com/mZlkQQJ.png">
+<meta name="twitter:title" content="Linux命令-网络篇">
+<meta name="twitter:description" content="Linux的网络命令 ping ping可以测试计算机名和计算机的 ip 地址,验证与远程计算机的连接,通过将 icmp 回显数据包发送到计算机并侦听回显回复数据包来验证与一台或多台远程计算机的连接,该命令只有在安装了 tcp/ip 协议后才可以使用  NAME    ping, ping6 - send ICMP ECHO_REQUEST to network hosts  SYNOPSIS 格">
+<meta name="twitter:image" content="https://seventeenwent.github.io/2017/08/20/Linux命令-网络篇/img/ping.gif">
 
 
 
@@ -137,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://seventeenwent.github.io/2017/08/10/Linux命令-sed的艺术（一）/"/>
+  <link rel="canonical" href="https://seventeenwent.github.io/2017/08/20/Linux命令-网络篇/"/>
 
 
 
 
 
-  <title>Linux命令-sed的艺术（一） | 温涛</title>
+  <title>Linux命令-网络篇 | 温涛</title>
   
 
 
@@ -310,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://seventeenwent.github.io/2017/08/10/Linux命令-sed的艺术（一）/">
+    <link itemprop="mainEntityOfPage" href="https://seventeenwent.github.io/2017/08/20/Linux命令-网络篇/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="温涛">
@@ -327,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux命令-sed的艺术（一）</h1>
+          <h1 class="post-title" itemprop="name headline">Linux命令-网络篇</h1>
         
 
         <div class="post-meta">
@@ -339,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T20:14:35+08:00">
-                2017-08-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-20T21:12:41+08:00">
+                2017-08-20
               </time>
             
 
@@ -377,34 +376,17 @@
       
 
       
-        <p>sed（stream editor for filtering and transforming text）是一种编辑器，全名是流式编辑器（Stream Editor），可以基于命令来操作数据流中的数据，这些命令要么从命令行中输入，要么保存在文本中。sed每次从输入中读取一行进行处理，并用提供的编辑器命令匹配该数据，按照命令中指定的操作修改数据，将生成的结果输出（stdout）。sed是对文件的行处理，如果没有file参数，sed会对标准输入作为处理。</p>
-<p>一条sed命令的格式：</p>
-<p><img src="http://i.imgur.com/mZlkQQJ.png" alt=""></p>
-<p>sed的scripts是对匹配上的    行做的处理。可以把sed看作一个编辑器，是一种更高级的编辑器。只不过sed是面向数据流编辑的，看不见文本的内容。sed的工作原理：sed每次一次处理文件的一行，处理时会将内容存放在临时缓冲区（学名：模式空间），处理完成后会将数据的内容送完屏幕显示出来。接着处理下一行。但是文件的内容只是看起来被修改了，实际文件的内容并没有被修改，如果想要模式空间的内容修改文件，需要加上修改参数，来修改文件的实际内容。</p>
-<h2 id="一个Demo"><a href="#一个Demo" class="headerlink" title="一个Demo"></a>一个Demo</h2><p>测试文本</p>
-<pre><code>cat&gt;&gt; demo.txt&lt;&lt;EOF
-Record1 field11 field21 field13
-Record2 field21 field22 field23
-Record3 field31 field32 field33
-Record4 field41 field42 field43    
-Record5 field51 field52 field53
-Record6 field61 field62 field63
-Record7 field71 field72 field73
-EOF
-</code></pre><p>在实际操作之前，先认识一个sed的特性</p>
-<pre><code>[root@1 sedDemo]# sed &apos;/c/p&apos; a.txt 
-a
-b
-c
-[root@1 sedDemo]# sed &apos;/c/p&apos; a.txt 
-a
-b
-c
-c    #c打印了两次 p代表打印匹配上的行    
-[root@1 sedDemo]# sed -n &apos;/c/p&apos; a.txt   #加上了-n参    数，代表只想打印匹配的行
-c
-</code></pre><p>sed最重要的就是sed-scripts，sed默认对文件内容的处理方式就是，将模式空间的内容输出到屏幕上。除了使用d标志来删除一行，否则文件内容都会在屏幕上显示。</p>
-<p><div align="center"><img src="http://i.imgur.com/r06J0Ui.png" alt=""></div></p>
+        <h1 id=""><a href="#" class="headerlink" title=""></a><blockquote class="blockquote-center"><p>Linux的网络命令</p>
+</blockquote></h1><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><div class="note default"><p>ping </p></div></h2><p>ping可以测试计算机名和计算机的 ip 地址,验证与远程计算机的连接,通过将 icmp 回显数据包发送到计算机并侦听回显回复数据包来验证与一台或多台远程计算机的连接,该命令只有在安装了 tcp/ip 协议后才可以使用</p>
+<pre><code> NAME
+   ping, ping6 - send ICMP ECHO_REQUEST to network hosts
+
+SYNOPSIS
+格式：
+   ping  [  -LRUbdfnqrvVaAB]  [ -c count]  [ -i interval]  [ -l preload]  [ -p pattern]  [ -s packetsize]  [ -t ttl]  [ -w dead-
+   line]  [ -F flowlabel]  [ -I interface]  [ -M hint]  [ -Q tos]  [ -S sndbuf]  [ -T timestamp option]  [ -W  timeout]   [  hop
+   ...]  destination
+</code></pre><p><img src="img/ping.gif" alt=""></p>
 
       
     </div>
@@ -435,15 +417,15 @@ c
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/08/20/Linux的网络基础/" rel="next" title="nginx">
+                <i class="fa fa-chevron-left"></i> nginx
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/11/Linux命令-sed的艺术（二）/" rel="prev" title="Linux命令-sed的艺术（二）">
-                Linux命令-sed的艺术（二） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -577,7 +559,8 @@ c
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一个Demo"><span class="nav-number">1.</span> <span class="nav-text">一个Demo</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Linux的网络命令
+</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">1.1.</span> <span class="nav-text">ping </span></a></li></ol></li></ol></div>
             
 
           </div>
