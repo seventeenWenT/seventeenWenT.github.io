@@ -94,18 +94,21 @@
 
 
 
-<meta name="description" content="隐约雷鸣 阴霾天空 但盼风雨来 能留你在此 隐约雷鸣 阴霾天空 即使天无雨 我亦留此地">
+<meta name="description" content="sed（stream editor for filtering and transforming text）是一种编辑器，全名是流式编辑器（Stream Editor），可以基于命令来操作数据流中的数据，这些命令要么从命令行中输入，要么保存在文本中。sed每次从输入中读取一行进行处理，并用提供的编辑器命令匹配该数据，按照命令中指定的操作修改数据，将生成的结果输出（stdout）。sed是对文件的行">
 <meta name="keywords" content="命令">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux命令-sed的艺术（一）">
 <meta property="og:url" content="https://seventeenwent.github.io/2017/08/10/Linux命令-sed的艺术（一）/index.html">
 <meta property="og:site_name" content="温涛">
-<meta property="og:description" content="隐约雷鸣 阴霾天空 但盼风雨来 能留你在此 隐约雷鸣 阴霾天空 即使天无雨 我亦留此地">
+<meta property="og:description" content="sed（stream editor for filtering and transforming text）是一种编辑器，全名是流式编辑器（Stream Editor），可以基于命令来操作数据流中的数据，这些命令要么从命令行中输入，要么保存在文本中。sed每次从输入中读取一行进行处理，并用提供的编辑器命令匹配该数据，按照命令中指定的操作修改数据，将生成的结果输出（stdout）。sed是对文件的行">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-11T00:31:35.412Z">
+<meta property="og:image" content="http://i.imgur.com/mZlkQQJ.png">
+<meta property="og:image" content="http://i.imgur.com/r06J0Ui.png">
+<meta property="og:updated_time" content="2017-08-11T06:11:31.228Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux命令-sed的艺术（一）">
-<meta name="twitter:description" content="隐约雷鸣 阴霾天空 但盼风雨来 能留你在此 隐约雷鸣 阴霾天空 即使天无雨 我亦留此地">
+<meta name="twitter:description" content="sed（stream editor for filtering and transforming text）是一种编辑器，全名是流式编辑器（Stream Editor），可以基于命令来操作数据流中的数据，这些命令要么从命令行中输入，要么保存在文本中。sed每次从输入中读取一行进行处理，并用提供的编辑器命令匹配该数据，按照命令中指定的操作修改数据，将生成的结果输出（stdout）。sed是对文件的行">
+<meta name="twitter:image" content="http://i.imgur.com/mZlkQQJ.png">
 
 
 
@@ -205,6 +208,46 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-datebase">
+          <a href="/datebase/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-circle"></i> <br />
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-service">
+          <a href="/service/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-circle-thin"></i> <br />
+            
+            服务
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/Linux/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -216,11 +259,21 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
+          <a href="/tags" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="/life" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-coffee"></i> <br />
+            
+            生活
           </a>
         </li>
       
@@ -324,7 +377,35 @@
       
 
       
-        
+        <p>sed（stream editor for filtering and transforming text）是一种编辑器，全名是流式编辑器（Stream Editor），可以基于命令来操作数据流中的数据，这些命令要么从命令行中输入，要么保存在文本中。sed每次从输入中读取一行进行处理，并用提供的编辑器命令匹配该数据，按照命令中指定的操作修改数据，将生成的结果输出（stdout）。sed是对文件的行处理，如果没有file参数，sed会对标准输入作为处理。</p>
+<p>一条sed命令的格式：</p>
+<p><img src="http://i.imgur.com/mZlkQQJ.png" alt=""></p>
+<p>sed的scripts是对匹配上的    行做的处理。可以把sed看作一个编辑器，是一种更高级的编辑器。只不过sed是面向数据流编辑的，看不见文本的内容。sed的工作原理：sed每次一次处理文件的一行，处理时会将内容存放在临时缓冲区（学名：模式空间），处理完成后会将数据的内容送完屏幕显示出来。接着处理下一行。但是文件的内容只是看起来被修改了，实际文件的内容并没有被修改，如果想要模式空间的内容修改文件，需要加上修改参数，来修改文件的实际内容。</p>
+<h2 id="一个Demo"><a href="#一个Demo" class="headerlink" title="一个Demo"></a>一个Demo</h2><p>测试文本</p>
+<pre><code>cat&gt;&gt; demo.txt&lt;&lt;EOF
+Record1 field11 field21 field13
+Record2 field21 field22 field23
+Record3 field31 field32 field33
+Record4 field41 field42 field43    
+Record5 field51 field52 field53
+Record6 field61 field62 field63
+Record7 field71 field72 field73
+EOF
+</code></pre><p>在实际操作之前，先认识一个sed的特性</p>
+<pre><code>[root@1 sedDemo]# sed &apos;/c/p&apos; a.txt 
+a
+b
+c
+[root@1 sedDemo]# sed &apos;/c/p&apos; a.txt 
+a
+b
+c
+c    #c打印了两次 p代表打印匹配上的行    
+[root@1 sedDemo]# sed -n &apos;/c/p&apos; a.txt   #加上了-n参    数，代表只想打印匹配的行
+c
+</code></pre><p>sed最重要的就是sed-scripts，sed默认对文件内容的处理方式就是，将模式空间的内容输出到屏幕上。除了使用d标志来删除一行，否则文件内容都会在屏幕上显示。</p>
+<p><div align="center"><img src="http://i.imgur.com/r06J0Ui.png" alt=""></div></p>
+
       
     </div>
     
@@ -350,6 +431,22 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/11/Linux命令-sed的艺术（二）/" rel="prev" title="Linux命令-sed的艺术（二）">
+                Linux命令-sed的艺术（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -398,8 +495,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -414,22 +520,31 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/service/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
           
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">1</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -452,6 +567,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一个Demo"><span class="nav-number">1.</span> <span class="nav-text">一个Demo</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
