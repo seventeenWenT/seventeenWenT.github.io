@@ -307,6 +307,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://seventeenwent.github.io/2017/08/23/网络协议-DHCP协议/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="温涛">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="温涛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/23/网络协议-DHCP协议/" itemprop="url">网络协议--DHCP协议</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-23T11:37:21+08:00">
+                2017-08-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="TCP和UDP协议"><a href="#TCP和UDP协议" class="headerlink" title="TCP和UDP协议"></a>TCP和UDP协议</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://seventeenwent.github.io/2017/08/22/Ansibel入门实践-基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -379,19 +520,35 @@
         
           
             <h2 id=""><a href="#" class="headerlink" title=""></a><blockquote class="blockquote-center"><p>Ansible的入门实践 </p>
-</blockquote></h2><p>##<div class="note info"><p>测试环境 </p></div>
+</blockquote></h2><div class="note info"><p>测试环境 </p></div>
 
-## <div class="note info"><p>安装步骤 </p></div><br>这里使用yum安装，但是必须先要替换yum源。<br>首先修改yum源</p>
+<div class="note info"><p>安装步骤 </p></div>
+<p>这里使用yum安装，但是必须先要替换yum源。<br>首先修改yum源</p>
 <pre><code>yum install yum install http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch.
 </code></pre><p>直接执行yum安装Absible</p>
 <pre><code>yum install Ansible -y
 </code></pre><p>安装完成后检查一下：</p>
 <pre><code>rpm -qa|grep &quot;ansible&quot;
-</code></pre><h3 id="-1"><a href="#-1" class="headerlink" title=""></a><div class="note default"><p>Ansible的配置管理 </p></div>
-
-### <div class="note default"><p>Ansible的测试 </p></div></h3><p>安装完成后简单的进行测试</p>
+</code></pre><h3 id="Ansible的配置管理"><a href="#Ansible的配置管理" class="headerlink" title="Ansible的配置管理"></a>Ansible的配置管理</h3><p>修改/etc/ansible/hosts文件</p>
+<pre><code>vim /etc/ansible/hosts
+[webservers]
+alpha.example.org
+beta.example.org
+192.168.1.100
+192.168.1.110
+</code></pre><p>将需要管理的主机地址添加进去</p>
+<pre><code>sed -i &apos;24a 10.0.0.170&apos; /etc/ansible/hosts
+sed -n &apos;25p&apos; /etc/ansible/hosts
+</code></pre><p>在管理机上生成ssh密钥<br>免交互生成ssh密钥对</p>
+<pre><code>echo -e &quot;\n&quot;|ssh-keygen -t dsa -N &quot;&quot;
+</code></pre><p>将生成的密钥对的公钥通过scp分发到所有被管理机器上。</p>
+<pre><code>ssh-copy-id  -i  ~/.ssh/id_rsa.pub  root@10.0.0.170
+</code></pre><p>如果修改了ssh的默认端口号则执行</p>
+<pre><code>ssh-copy-id -i ~/.ssh/id_dsa.pub “-p 52113 seventeen@10.0.0.170”
+</code></pre><h2 id="Ansible的测试"><a href="#Ansible的测试" class="headerlink" title="Ansible的测试"></a>Ansible的测试</h2><p>安装完成后简单的进行测试</p>
 <p><img src="../../../../img/ansible.gif.gif" alt=""></p>
-<h2 id="-2"><a href="#-2" class="headerlink" title=""></a><div class="note info"><p>Ansible的配置文件 </p></div></h2><p>Ansible 可同时操作属于一个组的多台主机,组和主机之间的关系通过 inventory 文件配置. 默认的文件路径为 /etc/ansible/hosts</p>
+<div class="note info"><p>Ansible的配置文件 </p></div>
+<p>Ansible 可同时操作属于一个组的多台主机,组和主机之间的关系通过 inventory 文件配置. 默认的文件路径为 /etc/ansible/hosts</p>
 
           
         
@@ -473,12 +630,21 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/service/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
           
 
           
@@ -486,7 +652,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

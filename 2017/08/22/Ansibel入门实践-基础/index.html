@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="Ansible的入门实践  ##测试环境   ## 安装步骤 这里使用yum安装，但是必须先要替换yum源。首先修改yum源 yum install yum install http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch. 直接执行yum安装Absible yum install Ansible -y 安装完">
+<meta name="description" content="Ansible的入门实践  测试环境   安装步骤  这里使用yum安装，但是必须先要替换yum源。首先修改yum源 yum install yum install http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch. 直接执行yum安装Absible yum install Ansible -y 安装完成后检查">
 <meta name="keywords" content="service">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ansibel入门实践---基础">
 <meta property="og:url" content="https://seventeenwent.github.io/2017/08/22/Ansibel入门实践-基础/index.html">
 <meta property="og:site_name" content="温涛">
-<meta property="og:description" content="Ansible的入门实践  ##测试环境   ## 安装步骤 这里使用yum安装，但是必须先要替换yum源。首先修改yum源 yum install yum install http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch. 直接执行yum安装Absible yum install Ansible -y 安装完">
+<meta property="og:description" content="Ansible的入门实践  测试环境   安装步骤  这里使用yum安装，但是必须先要替换yum源。首先修改yum源 yum install yum install http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch. 直接执行yum安装Absible yum install Ansible -y 安装完成后检查">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://seventeenwent.github.io/img/ansible.gif.gif">
-<meta property="og:updated_time" content="2017-08-22T23:17:14.559Z">
+<meta property="og:updated_time" content="2017-08-22T23:21:59.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ansibel入门实践---基础">
-<meta name="twitter:description" content="Ansible的入门实践  ##测试环境   ## 安装步骤 这里使用yum安装，但是必须先要替换yum源。首先修改yum源 yum install yum install http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch. 直接执行yum安装Absible yum install Ansible -y 安装完">
+<meta name="twitter:description" content="Ansible的入门实践  测试环境   安装步骤  这里使用yum安装，但是必须先要替换yum源。首先修改yum源 yum install yum install http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch. 直接执行yum安装Absible yum install Ansible -y 安装完成后检查">
 <meta name="twitter:image" content="https://seventeenwent.github.io/img/ansible.gif.gif">
 
 
@@ -377,19 +377,35 @@
 
       
         <h2 id=""><a href="#" class="headerlink" title=""></a><blockquote class="blockquote-center"><p>Ansible的入门实践 </p>
-</blockquote></h2><p>##<div class="note info"><p>测试环境 </p></div>
+</blockquote></h2><div class="note info"><p>测试环境 </p></div>
 
-## <div class="note info"><p>安装步骤 </p></div><br>这里使用yum安装，但是必须先要替换yum源。<br>首先修改yum源</p>
+<div class="note info"><p>安装步骤 </p></div>
+<p>这里使用yum安装，但是必须先要替换yum源。<br>首先修改yum源</p>
 <pre><code>yum install yum install http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch.
 </code></pre><p>直接执行yum安装Absible</p>
 <pre><code>yum install Ansible -y
 </code></pre><p>安装完成后检查一下：</p>
 <pre><code>rpm -qa|grep &quot;ansible&quot;
-</code></pre><h3 id="-1"><a href="#-1" class="headerlink" title=""></a><div class="note default"><p>Ansible的配置管理 </p></div>
-
-### <div class="note default"><p>Ansible的测试 </p></div></h3><p>安装完成后简单的进行测试</p>
+</code></pre><h3 id="Ansible的配置管理"><a href="#Ansible的配置管理" class="headerlink" title="Ansible的配置管理"></a>Ansible的配置管理</h3><p>修改/etc/ansible/hosts文件</p>
+<pre><code>vim /etc/ansible/hosts
+[webservers]
+alpha.example.org
+beta.example.org
+192.168.1.100
+192.168.1.110
+</code></pre><p>将需要管理的主机地址添加进去</p>
+<pre><code>sed -i &apos;24a 10.0.0.170&apos; /etc/ansible/hosts
+sed -n &apos;25p&apos; /etc/ansible/hosts
+</code></pre><p>在管理机上生成ssh密钥<br>免交互生成ssh密钥对</p>
+<pre><code>echo -e &quot;\n&quot;|ssh-keygen -t dsa -N &quot;&quot;
+</code></pre><p>将生成的密钥对的公钥通过scp分发到所有被管理机器上。</p>
+<pre><code>ssh-copy-id  -i  ~/.ssh/id_rsa.pub  root@10.0.0.170
+</code></pre><p>如果修改了ssh的默认端口号则执行</p>
+<pre><code>ssh-copy-id -i ~/.ssh/id_dsa.pub “-p 52113 seventeen@10.0.0.170”
+</code></pre><h2 id="Ansible的测试"><a href="#Ansible的测试" class="headerlink" title="Ansible的测试"></a>Ansible的测试</h2><p>安装完成后简单的进行测试</p>
 <p><img src="../../../../img/ansible.gif.gif" alt=""></p>
-<h2 id="-2"><a href="#-2" class="headerlink" title=""></a><div class="note info"><p>Ansible的配置文件 </p></div></h2><p>Ansible 可同时操作属于一个组的多台主机,组和主机之间的关系通过 inventory 文件配置. 默认的文件路径为 /etc/ansible/hosts</p>
+<div class="note info"><p>Ansible的配置文件 </p></div>
+<p>Ansible 可同时操作属于一个组的多台主机,组和主机之间的关系通过 inventory 文件配置. 默认的文件路径为 /etc/ansible/hosts</p>
 
       
     </div>
@@ -416,6 +432,22 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/23/网络协议-DHCP协议/" rel="prev" title="网络协议--DHCP协议">
+                网络协议--DHCP协议 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -489,12 +521,21 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/service/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
           
 
           
@@ -502,7 +543,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -538,9 +579,7 @@
 
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Ansible的入门实践 
-</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#-1"><span class="nav-number">1.1.</span> <span class="nav-text">Ansible的配置管理 
-
-### Ansible的测试 </span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-2"><span class="nav-number">2.</span> <span class="nav-text">Ansible的配置文件 </span></a></li></ol></div>
+</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ansible的配置管理"><span class="nav-number">1.1.</span> <span class="nav-text">Ansible的配置管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的测试"><span class="nav-number">2.</span> <span class="nav-text">Ansible的测试</span></a></li></ol></div>
             
 
           </div>
