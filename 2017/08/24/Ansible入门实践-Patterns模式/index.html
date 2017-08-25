@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="Ansible的入门实践  Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式命令的格式： ansible &amp;lt;pattern_goes_here&amp;gt; -m &amp;lt;module_name&amp;gt; -a &amp;lt;arguments&amp;gt; 通过pattern来寻找要执行命令的主机类似： [root@mananger /]# grep &amp;quot;model02&amp;quot">
+<meta name="description" content="Ansible的入门实践  Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式命令的格式： ansible &amp;lt;pattern_goes_here&amp;gt; -m &amp;lt;module_name&amp;gt;s -a &amp;lt;arguments&amp;gt; 通过pattern来寻找要执行命令的主机类似： [root@mananger /]# grep &amp;quot;model02&amp;quo">
 <meta name="keywords" content="service">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ansible入门实践-Patterns模式">
 <meta property="og:url" content="https://seventeenwent.github.io/2017/08/24/Ansible入门实践-Patterns模式/index.html">
 <meta property="og:site_name" content="温涛">
-<meta property="og:description" content="Ansible的入门实践  Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式命令的格式： ansible &amp;lt;pattern_goes_here&amp;gt; -m &amp;lt;module_name&amp;gt; -a &amp;lt;arguments&amp;gt; 通过pattern来寻找要执行命令的主机类似： [root@mananger /]# grep &amp;quot;model02&amp;quot">
+<meta property="og:description" content="Ansible的入门实践  Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式命令的格式： ansible &amp;lt;pattern_goes_here&amp;gt; -m &amp;lt;module_name&amp;gt;s -a &amp;lt;arguments&amp;gt; 通过pattern来寻找要执行命令的主机类似： [root@mananger /]# grep &amp;quot;model02&amp;quo">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://seventeenwent.github.io/img/ansible2.gif.gif">
-<meta property="og:updated_time" content="2017-08-25T08:30:57.409Z">
+<meta property="og:updated_time" content="2017-08-25T08:41:08.626Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ansible入门实践-Patterns模式">
-<meta name="twitter:description" content="Ansible的入门实践  Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式命令的格式： ansible &amp;lt;pattern_goes_here&amp;gt; -m &amp;lt;module_name&amp;gt; -a &amp;lt;arguments&amp;gt; 通过pattern来寻找要执行命令的主机类似： [root@mananger /]# grep &amp;quot;model02&amp;quot">
+<meta name="twitter:description" content="Ansible的入门实践  Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式命令的格式： ansible &amp;lt;pattern_goes_here&amp;gt; -m &amp;lt;module_name&amp;gt;s -a &amp;lt;arguments&amp;gt; 通过pattern来寻找要执行命令的主机类似： [root@mananger /]# grep &amp;quot;model02&amp;quo">
 <meta name="twitter:image" content="https://seventeenwent.github.io/img/ansible2.gif.gif">
 
 
@@ -378,7 +378,7 @@
       
         <h2 id=""><a href="#" class="headerlink" title=""></a><blockquote class="blockquote-center"><p>Ansible的入门实践 </p>
 </blockquote></h2><p>Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式<br>命令的格式：</p>
-<pre><code>ansible &lt;pattern_goes_here&gt; -m &lt;module_name&gt; -a &lt;arguments&gt;
+<pre><code>ansible &lt;pattern_goes_here&gt; -m &lt;module_name&gt;s -a &lt;arguments&gt;
 </code></pre><p>通过pattern来寻找要执行命令的主机<br>类似：</p>
 <pre><code>[root@mananger /]# grep &quot;model02&quot; /etc/ansible/hosts  -C4
 [webserver]

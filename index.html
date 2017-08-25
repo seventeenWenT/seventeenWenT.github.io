@@ -512,7 +512,7 @@ cp /demo/test.txt /tmp/testcp.txt
           
             <h2 id=""><a href="#" class="headerlink" title=""></a><blockquote class="blockquote-center"><p>Ansible的入门实践 </p>
 </blockquote></h2><p>Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式<br>命令的格式：</p>
-<pre><code>ansible &lt;pattern_goes_here&gt; -m &lt;module_name&gt; -a &lt;arguments&gt;
+<pre><code>ansible &lt;pattern_goes_here&gt; -m &lt;module_name&gt;s -a &lt;arguments&gt;
 </code></pre><p>通过pattern来寻找要执行命令的主机<br>类似：</p>
 <pre><code>[root@mananger /]# grep &quot;model02&quot; /etc/ansible/hosts  -C4
 [webserver]
