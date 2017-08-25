@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="温涛的博客" />
+  <meta name="keywords" content="service," />
 
 
 
@@ -94,16 +94,21 @@
 
 
 
-<meta name="description" content="隐约雷鸣 阴霾天空 但盼风雨来 能留你在此 隐约雷鸣 阴霾天空 即使天无雨 我亦留此地">
-<meta property="og:type" content="website">
-<meta property="og:title" content="温涛">
-<meta property="og:url" content="https://seventeenwent.github.io/tags/service/index.html">
+<meta name="description" content="rsync的版本[root@backup ~]# cat /etc/redhat-release CentOS release 6.9 (Final) [root@backup ~]# uname -r 2.6.32-696.el6.x86_64 [root@backup ~]# rpm -qa|grep rsync rsync-3.0.6-12.el6.x86_64 rsync的三种工作模式rs">
+<meta name="keywords" content="service">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rsync详细笔记">
+<meta property="og:url" content="https://seventeenwent.github.io/2017/08/25/rsync详细笔记/index.html">
 <meta property="og:site_name" content="温涛">
-<meta property="og:description" content="隐约雷鸣 阴霾天空 但盼风雨来 能留你在此 隐约雷鸣 阴霾天空 即使天无雨 我亦留此地">
+<meta property="og:description" content="rsync的版本[root@backup ~]# cat /etc/redhat-release CentOS release 6.9 (Final) [root@backup ~]# uname -r 2.6.32-696.el6.x86_64 [root@backup ~]# rpm -qa|grep rsync rsync-3.0.6-12.el6.x86_64 rsync的三种工作模式rs">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://seventeenwent.github.io/img/rsync1.gif">
+<meta property="og:image" content="https://seventeenwent.github.io/img/rsync2.gif">
+<meta property="og:updated_time" content="2017-08-25T08:13:26.033Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="温涛">
-<meta name="twitter:description" content="隐约雷鸣 阴霾天空 但盼风雨来 能留你在此 隐约雷鸣 阴霾天空 即使天无雨 我亦留此地">
+<meta name="twitter:title" content="rsync详细笔记">
+<meta name="twitter:description" content="rsync的版本[root@backup ~]# cat /etc/redhat-release CentOS release 6.9 (Final) [root@backup ~]# uname -r 2.6.32-696.el6.x86_64 [root@backup ~]# rpm -qa|grep rsync rsync-3.0.6-12.el6.x86_64 rsync的三种工作模式rs">
+<meta name="twitter:image" content="https://seventeenwent.github.io/img/rsync1.gif">
 
 
 
@@ -132,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="https://seventeenwent.github.io/tags/service/"/>
+  <link rel="canonical" href="https://seventeenwent.github.io/2017/08/25/rsync详细笔记/"/>
 
 
 
 
 
-  <title>标签: service | 温涛</title>
+  <title>rsync详细笔记 | 温涛</title>
   
 
 
@@ -157,7 +162,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -291,110 +296,159 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>service<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://seventeenwent.github.io/2017/08/25/rsync详细笔记/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="温涛">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="温涛">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/08/25/rsync详细笔记/" itemprop="url">
-              
-                <span itemprop="name">rsync详细笔记</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">rsync详细笔记</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-25T14:57:31+08:00"
-              content="2017-08-25" >
-          08-25
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T14:57:31+08:00">
+                2017-08-25
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/24/Ansible入门实践-Patterns模式/" itemprop="url">
-              
-                <span itemprop="name">Ansible入门实践-Patterns模式</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-24T08:16:01+08:00"
-              content="2017-08-24" >
-          08-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/22/Ansibel入门实践-基础/" itemprop="url">
-              
-                <span itemprop="name">Ansibel入门实践---基础</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-22T23:39:33+08:00"
-              content="2017-08-22" >
-          08-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h2 id="rsync的版本"><a href="#rsync的版本" class="headerlink" title="rsync的版本"></a>rsync的版本</h2><pre><code>[root@backup ~]# cat /etc/redhat-release
+CentOS release 6.9 (Final)
+[root@backup ~]# uname -r
+2.6.32-696.el6.x86_64
+[root@backup ~]# rpm -qa|grep rsync
+rsync-3.0.6-12.el6.x86_64
+</code></pre><h2 id="rsync的三种工作模式"><a href="#rsync的三种工作模式" class="headerlink" title="rsync的三种工作模式"></a>rsync的三种工作模式</h2><h3 id="rsync的本地工作模式"><a href="#rsync的本地工作模式" class="headerlink" title="rsync的本地工作模式"></a>rsync的本地工作模式</h3><p>在本地rsync相当于cp命令</p>
+<pre><code>mkdir /demo
+touch /demo/test.txt
+rsync /demo/test.tx  /tmp/testrsync.txt
+cp /demo/test.txt /tmp/testcp.txt
+</code></pre><p><img src="../../../../img/rsync1.gif" alt=""></p>
+<p><img src="../../../../img/rsync2.gif" alt=""></p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/service/" rel="tag"># service</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/24/Ansible入门实践-Patterns模式/" rel="next" title="Ansible入门实践-Patterns模式">
+                <i class="fa fa-chevron-left"></i> Ansible入门实践-Patterns模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -402,6 +456,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -422,8 +480,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -485,6 +552,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync的版本"><span class="nav-number">1.</span> <span class="nav-text">rsync的版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync的三种工作模式"><span class="nav-number">2.</span> <span class="nav-text">rsync的三种工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync的本地工作模式"><span class="nav-number">2.1.</span> <span class="nav-text">rsync的本地工作模式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -604,10 +687,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 

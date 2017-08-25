@@ -103,7 +103,7 @@
 <meta property="og:description" content="Ansible的入门实践  测试环境   安装步骤  这里使用yum安装，但是必须先要替换yum源。首先修改yum源 yum install yum install http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch. 直接执行yum安装Absible yum install Ansible -y 安装完成后检查">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://seventeenwent.github.io/img/ansible.gif.gif">
-<meta property="og:updated_time" content="2017-08-22T23:21:59.846Z">
+<meta property="og:updated_time" content="2017-08-24T00:00:47.735Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ansibel入门实践---基础">
 <meta name="twitter:description" content="Ansible的入门实践  测试环境   安装步骤  这里使用yum安装，但是必须先要替换yum源。首先修改yum源 yum install yum install http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch. 直接执行yum安装Absible yum install Ansible -y 安装完成后检查">
@@ -406,7 +406,24 @@ sed -n &apos;25p&apos; /etc/ansible/hosts
 <p><img src="../../../../img/ansible.gif.gif" alt=""></p>
 <div class="note info"><p>Ansible的配置文件 </p></div>
 <p>Ansible 可同时操作属于一个组的多台主机,组和主机之间的关系通过 inventory 文件配置. 默认的文件路径为 /etc/ansible/hosts</p>
-
+<h3 id="Ansibile主机与组"><a href="#Ansibile主机与组" class="headerlink" title="Ansibile主机与组"></a>Ansibile主机与组</h3><pre><code>[webserver]
+10.0.0.172
+[nfs]
+10.0.0.173
+[base]
+10.0.0.172
+10.0.0.173
+</code></pre><p>方括号[]中是组名，可以用于对系统的分类，一台主机可以属于不同的组，同一台服务器既可以属于<br>webserver组也可以属于nfs组。属于这两个组的变量可以同时为这两个组使用，如果主机修改了ssh的默认端口号22，而是52113，那么可以明确的表示使用哪个端口进行连接</p>
+<pre><code>[webserver]
+10.0.0.172:52113
+</code></pre><p>还可以指定通过什么连接，使用什么用户登录；</p>
+<pre><code>[targets]
+10.0.0.173   ansible_connection=ssh  ansible_ssh_user=seven
+</code></pre><p>如果主机的名称相似可以设置为：</p>
+<pre><code>[webserver]
+10.0.0.17[2..3] #在数字的简写模式可以定义这个范围
+com.web[a..z]   #可以定义字母
+</code></pre>
       
     </div>
     
@@ -521,7 +538,7 @@ sed -n &apos;25p&apos; /etc/ansible/hosts
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -579,7 +596,7 @@ sed -n &apos;25p&apos; /etc/ansible/hosts
 
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Ansible的入门实践 
-</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ansible的配置管理"><span class="nav-number">1.1.</span> <span class="nav-text">Ansible的配置管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的测试"><span class="nav-number">2.</span> <span class="nav-text">Ansible的测试</span></a></li></ol></div>
+</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ansible的配置管理"><span class="nav-number">1.1.</span> <span class="nav-text">Ansible的配置管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的测试"><span class="nav-number">2.</span> <span class="nav-text">Ansible的测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ansibile主机与组"><span class="nav-number">2.1.</span> <span class="nav-text">Ansibile主机与组</span></a></li></ol></li></ol></div>
             
 
           </div>

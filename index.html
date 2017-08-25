@@ -307,6 +307,303 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://seventeenwent.github.io/2017/08/25/rsync详细笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="温涛">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="温涛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/25/rsync详细笔记/" itemprop="url">rsync详细笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T14:57:31+08:00">
+                2017-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="rsync的版本"><a href="#rsync的版本" class="headerlink" title="rsync的版本"></a>rsync的版本</h2><pre><code>[root@backup ~]# cat /etc/redhat-release
+CentOS release 6.9 (Final)
+[root@backup ~]# uname -r
+2.6.32-696.el6.x86_64
+[root@backup ~]# rpm -qa|grep rsync
+rsync-3.0.6-12.el6.x86_64
+</code></pre><h2 id="rsync的三种工作模式"><a href="#rsync的三种工作模式" class="headerlink" title="rsync的三种工作模式"></a>rsync的三种工作模式</h2><h3 id="rsync的本地工作模式"><a href="#rsync的本地工作模式" class="headerlink" title="rsync的本地工作模式"></a>rsync的本地工作模式</h3><p>在本地rsync相当于cp命令</p>
+<pre><code>mkdir /demo
+touch /demo/test.txt
+rsync /demo/test.tx  /tmp/testrsync.txt
+cp /demo/test.txt /tmp/testcp.txt
+</code></pre><p><img src="../../../../img/rsync1.gif" alt=""></p>
+<p><img src="../../../../img/rsync2.gif" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://seventeenwent.github.io/2017/08/24/Ansible入门实践-Patterns模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="温涛">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="温涛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/24/Ansible入门实践-Patterns模式/" itemprop="url">Ansible入门实践-Patterns模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-24T08:16:01+08:00">
+                2017-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id=""><a href="#" class="headerlink" title=""></a><blockquote class="blockquote-center"><p>Ansible的入门实践 </p>
+</blockquote></h2><p>Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式<br>命令的格式：</p>
+<pre><code>ansible &lt;pattern_goes_here&gt; -m &lt;module_name&gt; -a &lt;arguments&gt;
+</code></pre><p>通过pattern来寻找要执行命令的主机<br>类似：</p>
+<pre><code>[root@mananger /]# grep &quot;model02&quot; /etc/ansible/hosts  -C4
+[webserver]
+10.0.0.17[2:3]
+[model02]
+10.0.0.172
+</code></pre><p>执行命令：</p>
+<pre><code>[root@mananger /]# ansible model02 -m ping
+10.0.0.172 | SUCCESS =&gt; {
+&quot;changed&quot;: false,
+&quot;ping&quot;: &quot;pong&quot;
+}
+</code></pre><p>无论如何都要告诉ansible要指定给那台主机执行命令</p>
+<p>指定*或者all代表所有机器</p>
+<p>通过指定IP地址来来进行管理</p>
+<pre><code>[root@mananger /]# ansible 10.0.0.172 -m ping
+10.0.0.172 | SUCCESS =&gt; {
+&quot;changed&quot;: false,
+&quot;ping&quot;: &quot;pong&quot;
+</code></pre><p>}</p>
+<p>通过！来排除某些组</p>
+<p>通过：来分隔多个组</p>
+<pre><code>[root@mananger /]# ansible model01:model02 -m ping
+10.0.0.172 | SUCCESS =&gt; {
+&quot;changed&quot;: false,
+&quot;ping&quot;: &quot;pong&quot;
+}
+10.0.0.173 | SUCCESS =&gt; {
+&quot;changed&quot;: false,
+&quot;ping&quot;: &quot;pong&quot;
+}
+</code></pre><p>可以通过正则表达式来匹配，只不过正则表达式要用~开头</p>
+<pre><code>[root@mananger /]# ansible ~model[0-9]{2} -m ping
+10.0.0.172 | SUCCESS =&gt; {
+&quot;changed&quot;: false,
+&quot;ping&quot;: &quot;pong&quot;
+}
+10.0.0.173 | SUCCESS =&gt; {
+&quot;changed&quot;: false,
+&quot;ping&quot;: &quot;pong&quot;
+}
+</code></pre><p><img src="../../../../img/ansible2.gif.gif" alt=""></p>
+<div class="note info"><p>Ansible </p></div>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://seventeenwent.github.io/2017/08/23/网络协议-DHCP协议/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -400,7 +697,7 @@
       
         
           
-            <h1 id="TCP和UDP协议"><a href="#TCP和UDP协议" class="headerlink" title="TCP和UDP协议"></a>TCP和UDP协议</h1>
+            <h1 id="DHCP协议"><a href="#DHCP协议" class="headerlink" title="DHCP协议"></a>DHCP协议</h1>
           
         
       
@@ -549,7 +846,24 @@ sed -n &apos;25p&apos; /etc/ansible/hosts
 <p><img src="../../../../img/ansible.gif.gif" alt=""></p>
 <div class="note info"><p>Ansible的配置文件 </p></div>
 <p>Ansible 可同时操作属于一个组的多台主机,组和主机之间的关系通过 inventory 文件配置. 默认的文件路径为 /etc/ansible/hosts</p>
-
+<h3 id="Ansibile主机与组"><a href="#Ansibile主机与组" class="headerlink" title="Ansibile主机与组"></a>Ansibile主机与组</h3><pre><code>[webserver]
+10.0.0.172
+[nfs]
+10.0.0.173
+[base]
+10.0.0.172
+10.0.0.173
+</code></pre><p>方括号[]中是组名，可以用于对系统的分类，一台主机可以属于不同的组，同一台服务器既可以属于<br>webserver组也可以属于nfs组。属于这两个组的变量可以同时为这两个组使用，如果主机修改了ssh的默认端口号22，而是52113，那么可以明确的表示使用哪个端口进行连接</p>
+<pre><code>[webserver]
+10.0.0.172:52113
+</code></pre><p>还可以指定通过什么连接，使用什么用户登录；</p>
+<pre><code>[targets]
+10.0.0.173   ansible_connection=ssh  ansible_ssh_user=seven
+</code></pre><p>如果主机的名称相似可以设置为：</p>
+<pre><code>[webserver]
+10.0.0.17[2..3] #在数字的简写模式可以定义这个范围
+com.web[a..z]   #可以定义字母
+</code></pre>
           
         
       
@@ -630,7 +944,7 @@ sed -n &apos;25p&apos; /etc/ansible/hosts
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
