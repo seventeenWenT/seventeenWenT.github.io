@@ -390,8 +390,18 @@ touch /demo/test.txt
 rsync /demo/test.tx  /tmp/testrsync.txt
 cp /demo/test.txt /tmp/testcp.txt
 </code></pre><p><img src="../../../../images/rsync1.gif" alt=""></p>
+<p>可以看出rsync在本地和cp命令的没有什么差别</p>
 <p><img src="../../../../images/rsync2.gif" alt=""></p>
-<h3 id="rsync的"><a href="#rsync的" class="headerlink" title="rsync的"></a>rsync的</h3>
+<h3 id="rsync通过管道ssh传输数据"><a href="#rsync通过管道ssh传输数据" class="headerlink" title="rsync通过管道ssh传输数据"></a>rsync通过管道ssh传输数据</h3><pre><code>rsync backup 172.16.1.31:/tmp
+</code></pre><p><img src="../../../../images/rsunc3.gif" alt=""></p>
+<div class="note error"><p>rsync传输目录时的注意 </p></div>
+<p>通过rsync传输目录时需要注意传输的目录后面是否有/。</p>
+<ul>
+<li>如果是/dir/ 目录后面加上了斜线，只会将目录的内容复制到目标目录</li>
+<li>如果是/dir   则会将目录和目录的内容一起复制到目标目录</li>
+</ul>
+<h3 id="rsync的Daemon模式"><a href="#rsync的Daemon模式" class="headerlink" title="rsync的Daemon模式"></a>rsync的Daemon模式</h3><h2 id="rsync的参数列表"><a href="#rsync的参数列表" class="headerlink" title="rsync的参数列表"></a>rsync的参数列表</h2><p><img src="../../../../images/rsync.png" alt=""></p>
+
           
         
       
