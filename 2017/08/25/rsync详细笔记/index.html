@@ -104,9 +104,9 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync1.gif">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync2.gif">
-<meta property="og:image" content="https://seventeenwent.github.io/images/rsunc3.gif">
+<meta property="og:image" content="https://seventeenwent.github.io/images/rsync3.gif">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync.png">
-<meta property="og:updated_time" content="2017-08-25T09:08:29.516Z">
+<meta property="og:updated_time" content="2017-08-25T09:12:25.679Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rsync详细笔记">
 <meta name="twitter:description" content="rsync的版本[root@backup ~]# cat /etc/redhat-release CentOS release 6.9 (Final) [root@backup ~]# uname -r 2.6.32-696.el6.x86_64 [root@backup ~]# rpm -qa|grep rsync rsync-3.0.6-12.el6.x86_64 rsync的三种工作模式rs">
@@ -394,8 +394,8 @@ cp /demo/test.txt /tmp/testcp.txt
 <p>可以看出rsync在本地和cp命令的没有什么差别</p>
 <p><img src="../../../../images/rsync2.gif" alt=""></p>
 <h3 id="rsync通过管道ssh传输数据"><a href="#rsync通过管道ssh传输数据" class="headerlink" title="rsync通过管道ssh传输数据"></a>rsync通过管道ssh传输数据</h3><pre><code>rsync backup 172.16.1.31:/tmp
-</code></pre><p><img src="../../../../images/rsunc3.gif" alt=""></p>
-<div class="note error"><p>rsync传输目录时的注意 </p></div>
+</code></pre><p><img src="../../../../images/rsync3.gif" alt=""></p>
+<div class="note danger"><p>rsync传输目录时的注意 </p></div>
 <p>通过rsync传输目录时需要注意传输的目录后面是否有/。</p>
 <ul>
 <li>如果是/dir/ 目录后面加上了斜线，只会将目录的内容复制到目标目录</li>
