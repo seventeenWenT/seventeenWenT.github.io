@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync3.gif">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync4.gif">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync.png">
-<meta property="og:updated_time" content="2017-08-26T05:55:34.380Z">
+<meta property="og:updated_time" content="2017-08-26T08:06:11.679Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rsync详细笔记">
 <meta name="twitter:description" content="rsync的版本[root@backup ~]# cat /etc/redhat-release CentOS release 6.9 (Final) [root@backup ~]# uname -r 2.6.32-696.el6.x86_64 [root@backup ~]# rpm -qa|grep rsync rsync-3.0.6-12.el6.x86_64 rsync的三种工作模式rs">
@@ -415,7 +415,8 @@ touch {1..10}.log
 rsync -avz --delete /demo/ 172.16.1.31:/beifen
 </code></pre><p>参数说明：</p>
 <p>--delete:这个参数可以理解为强制使rsync的目标端和源端的内容一致。非常危险。一不小心就会清空整个备份。也可以说是你的本地目录是什么样子就会同步成什么样子.</p>
-<h3 id="rsync的Daemon模式"><a href="#rsync的Daemon模式" class="headerlink" title="rsync的Daemon模式"></a>rsync的Daemon模式</h3><h2 id="rsync的参数列表"><a href="#rsync的参数列表" class="headerlink" title="rsync的参数列表"></a>rsync的参数列表</h2><p><img src="../../../../images/rsync.png" alt=""></p>
+<h3 id="rsync的Daemon模式"><a href="#rsync的Daemon模式" class="headerlink" title="rsync的Daemon模式"></a>rsync的Daemon模式</h3><p>rsync的daemon模式是一个服务端和客户端的结构。</p>
+<h2 id="rsync的参数列表"><a href="#rsync的参数列表" class="headerlink" title="rsync的参数列表"></a>rsync的参数列表</h2><p><img src="../../../../images/rsync.png" alt=""></p>
 <h2 id="rsync的推送（pull）和拉取（push）"><a href="#rsync的推送（pull）和拉取（push）" class="headerlink" title="rsync的推送（pull）和拉取（push）"></a>rsync的推送（pull）和拉取（push）</h2><blockquote>
 <p>推送的意思是将数据从本地传输到远端</p>
 </blockquote>
@@ -463,6 +464,10 @@ rsync -avz --delete /demo/ 172.16.1.31:/beifen
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/26/rsyncDeamon模式配置过程/" rel="prev" title="rsyncDeamon模式配置过程">
+                rsyncDeamon模式配置过程 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -539,7 +544,7 @@ rsync -avz --delete /demo/ 172.16.1.31:/beifen
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

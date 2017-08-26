@@ -307,6 +307,135 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://seventeenwent.github.io/2017/08/26/rsyncDeamon模式配置过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="温涛">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="温涛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/26/rsyncDeamon模式配置过程/" itemprop="url">rsyncDeamon模式配置过程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-26T14:29:53+08:00">
+                2017-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          rsync的Deamon模式搭建rsync服务端检查rsync软件包是否存在rpm -qa|grep &quot;rsync&quot;
+编辑rsync的配置文件vim  /etc/rsyncd.conf
+uid = rsync #虚拟用户 远端的命令使用rsync访问共享目录
+gid = rsyn
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/26/rsyncDeamon模式配置过程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://seventeenwent.github.io/2017/08/25/rsync详细笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -378,52 +507,19 @@
       
         
           
-            <h2 id="rsync的版本"><a href="#rsync的版本" class="headerlink" title="rsync的版本"></a>rsync的版本</h2><pre><code>[root@backup ~]# cat /etc/redhat-release
+          rsync的版本[root@backup ~]# cat /etc/redhat-release
 CentOS release 6.9 (Final)
 [root@backup ~]# uname -r
 2.6.32-696.el6.x86_64
-[root@backup ~]# rpm -qa|grep rsync
-rsync-3.0.6-12.el6.x86_64
-</code></pre><h2 id="rsync的三种工作模式"><a href="#rsync的三种工作模式" class="headerlink" title="rsync的三种工作模式"></a>rsync的三种工作模式</h2><h3 id="rsync的本地工作模式"><a href="#rsync的本地工作模式" class="headerlink" title="rsync的本地工作模式"></a>rsync的本地工作模式</h3><p>在本地rsync相当于cp命令</p>
-<pre><code>mkdir /demo
-touch /demo/test.txt
-rsync /demo/test.tx  /tmp/testrsync.txt
-cp /demo/test.txt /tmp/testcp.txt
-</code></pre><p><img src="../../../../images/rsync1.gif" alt=""></p>
-<p>可以看出rsync在本地和cp命令的没有什么差别</p>
-<p><img src="../../../../images/rsync2.gif" alt=""></p>
-<h3 id="rsync通过管道ssh传输数据"><a href="#rsync通过管道ssh传输数据" class="headerlink" title="rsync通过管道ssh传输数据"></a>rsync通过管道ssh传输数据</h3><pre><code>rsync backup 172.16.1.31:/tmp
-</code></pre><p><img src="../../../../images/rsync3.gif" alt=""></p>
-<div class="note danger"><p>rsync传输目录时的注意 </p></div>
-
-通过rsync传输目录时需要注意传输的目录后面是否有/。
-
-- 如果是/dir/ 目录后面加上了斜线，只会将目录的内容复制到目标目录
-- 如果是/dir   则会将目录和目录的内容一起复制到目标目录
-
-
-
-<div class="note danger"><p>rsync需要注意的参数–delte </p></div>
-<p>  --<strong>delte</strong>需要特殊的注意，因为一个不小心就可能造成非常严重的后果所以需要特别注意。</p>
-<p><img src="../../../../images/rsync4.gif" alt=""></p>
-<p>操作步骤：</p>
-<pre><code>【nfs】
-touch {1..10}.log
-【backup】
-rsync -avz --delete /demo/ 172.16.1.31:/beifen
-</code></pre><p>参数说明：</p>
-<p>--delete:这个参数可以理解为强制使rsync的目标端和源端的内容一致。非常危险。一不小心就会清空整个备份。也可以说是你的本地目录是什么样子就会同步成什么样子.</p>
-<h3 id="rsync的Daemon模式"><a href="#rsync的Daemon模式" class="headerlink" title="rsync的Daemon模式"></a>rsync的Daemon模式</h3><h2 id="rsync的参数列表"><a href="#rsync的参数列表" class="headerlink" title="rsync的参数列表"></a>rsync的参数列表</h2><p><img src="../../../../images/rsync.png" alt=""></p>
-<h2 id="rsync的推送（pull）和拉取（push）"><a href="#rsync的推送（pull）和拉取（push）" class="headerlink" title="rsync的推送（pull）和拉取（push）"></a>rsync的推送（pull）和拉取（push）</h2><blockquote>
-<p>推送的意思是将数据从本地传输到远端</p>
-</blockquote>
-<pre><code>rsync -av /demo   172.16.1.31:/beifen
-</code></pre><blockquote>
-<p>拉取的意思是将数据从远端传输到本地</p>
-</blockquote>
-<pre><code>rsync -av  172.16.1.31:/beifen  /demo
-</code></pre>
-          
+[root@backup ~]# rpm -qa|g
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/25/rsync详细笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -541,54 +637,18 @@ rsync -avz --delete /demo/ 172.16.1.31:/beifen
       
         
           
-            <h2 id=""><a href="#" class="headerlink" title=""></a><blockquote class="blockquote-center"><p>Ansible的入门实践 </p>
-</blockquote></h2><p>Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式<br>命令的格式：</p>
-<pre><code>ansible &lt;pattern_goes_here&gt; -m &lt;module_name&gt;s -a &lt;arguments&gt;
-</code></pre><p>通过pattern来寻找要执行命令的主机<br>类似：</p>
-<pre><code>[root@mananger /]# grep &quot;model02&quot; /etc/ansible/hosts  -C4
-[webserver]
-10.0.0.17[2:3]
-[model02]
-10.0.0.172
-</code></pre><p>执行命令：</p>
-<pre><code>[root@mananger /]# ansible model02 -m ping
-10.0.0.172 | SUCCESS =&gt; {
-&quot;changed&quot;: false,
-&quot;ping&quot;: &quot;pong&quot;
-}
-</code></pre><p>无论如何都要告诉ansible要指定给那台主机执行命令</p>
-<p>指定*或者all代表所有机器</p>
-<p>通过指定IP地址来来进行管理</p>
-<pre><code>[root@mananger /]# ansible 10.0.0.172 -m ping
-10.0.0.172 | SUCCESS =&gt; {
-&quot;changed&quot;: false,
-&quot;ping&quot;: &quot;pong&quot;
-</code></pre><p>}</p>
-<p>通过！来排除某些组</p>
-<p>通过：来分隔多个组</p>
-<pre><code>[root@mananger /]# ansible model01:model02 -m ping
-10.0.0.172 | SUCCESS =&gt; {
-&quot;changed&quot;: false,
-&quot;ping&quot;: &quot;pong&quot;
-}
-10.0.0.173 | SUCCESS =&gt; {
-&quot;changed&quot;: false,
-&quot;ping&quot;: &quot;pong&quot;
-}
-</code></pre><p>可以通过正则表达式来匹配，只不过正则表达式要用~开头</p>
-<pre><code>[root@mananger /]# ansible ~model[0-9]{2} -m ping
-10.0.0.172 | SUCCESS =&gt; {
-&quot;changed&quot;: false,
-&quot;ping&quot;: &quot;pong&quot;
-}
-10.0.0.173 | SUCCESS =&gt; {
-&quot;changed&quot;: false,
-&quot;ping&quot;: &quot;pong&quot;
-}
-</code></pre><p><img src="../../../../img/ansible2.gif.gif" alt=""></p>
-<div class="note info"><p>Ansible </p></div>
-
-          
+          Ansible的入门实践 
+Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式命令的格式：
+ansible &lt;pattern_goes_here&gt; -m &lt;module_name&gt;s -a &lt;arguments&gt;
+通过pattern来寻找要执行
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/24/Ansible入门实践-Patterns模式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -728,8 +788,15 @@ rsync -avz --delete /demo/ 172.16.1.31:/beifen
       
         
           
-            <h1 id="DHCP协议"><a href="#DHCP协议" class="headerlink" title="DHCP协议"></a>DHCP协议</h1>
+          DHCP协议
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/23/网络协议-DHCP协议/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -847,55 +914,20 @@ rsync -avz --delete /demo/ 172.16.1.31:/beifen
       
         
           
-            <h2 id=""><a href="#" class="headerlink" title=""></a><blockquote class="blockquote-center"><p>Ansible的入门实践 </p>
-</blockquote></h2><div class="note info"><p>测试环境 </p></div>
+          Ansible的入门实践 
+测试环境 
 
-<div class="note info"><p>安装步骤 </p></div>
-<p>这里使用yum安装，但是必须先要替换yum源。<br>首先修改yum源</p>
-<pre><code>yum install yum install http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarch.
-</code></pre><p>直接执行yum安装Absible</p>
-<pre><code>yum install Ansible -y
-</code></pre><p>安装完成后检查一下：</p>
-<pre><code>rpm -qa|grep &quot;ansible&quot;
-</code></pre><h3 id="Ansible的配置管理"><a href="#Ansible的配置管理" class="headerlink" title="Ansible的配置管理"></a>Ansible的配置管理</h3><p>修改/etc/ansible/hosts文件</p>
-<pre><code>vim /etc/ansible/hosts
-[webservers]
-alpha.example.org
-beta.example.org
-192.168.1.100
-192.168.1.110
-</code></pre><p>将需要管理的主机地址添加进去</p>
-<pre><code>sed -i &apos;24a 10.0.0.170&apos; /etc/ansible/hosts
-sed -n &apos;25p&apos; /etc/ansible/hosts
-</code></pre><p>在管理机上生成ssh密钥<br>免交互生成ssh密钥对</p>
-<pre><code>echo -e &quot;\n&quot;|ssh-keygen -t dsa -N &quot;&quot;
-</code></pre><p>将生成的密钥对的公钥通过scp分发到所有被管理机器上。</p>
-<pre><code>ssh-copy-id  -i  ~/.ssh/id_rsa.pub  root@10.0.0.170
-</code></pre><p>如果修改了ssh的默认端口号则执行</p>
-<pre><code>ssh-copy-id -i ~/.ssh/id_dsa.pub “-p 52113 seventeen@10.0.0.170”
-</code></pre><h2 id="Ansible的测试"><a href="#Ansible的测试" class="headerlink" title="Ansible的测试"></a>Ansible的测试</h2><p>安装完成后简单的进行测试</p>
-<p><img src="../../../../img/ansible.gif.gif" alt=""></p>
-<div class="note info"><p>Ansible的配置文件 </p></div>
-<p>Ansible 可同时操作属于一个组的多台主机,组和主机之间的关系通过 inventory 文件配置. 默认的文件路径为 /etc/ansible/hosts</p>
-<h3 id="Ansibile主机与组"><a href="#Ansibile主机与组" class="headerlink" title="Ansibile主机与组"></a>Ansibile主机与组</h3><pre><code>[webserver]
-10.0.0.172
-[nfs]
-10.0.0.173
-[base]
-10.0.0.172
-10.0.0.173
-</code></pre><p>方括号[]中是组名，可以用于对系统的分类，一台主机可以属于不同的组，同一台服务器既可以属于<br>webserver组也可以属于nfs组。属于这两个组的变量可以同时为这两个组使用，如果主机修改了ssh的默认端口号22，而是52113，那么可以明确的表示使用哪个端口进行连接</p>
-<pre><code>[webserver]
-10.0.0.172:52113
-</code></pre><p>还可以指定通过什么连接，使用什么用户登录；</p>
-<pre><code>[targets]
-10.0.0.173   ansible_connection=ssh  ansible_ssh_user=seven
-</code></pre><p>如果主机的名称相似可以设置为：</p>
-<pre><code>[webserver]
-10.0.0.17[2..3] #在数字的简写模式可以定义这个范围
-com.web[a..z]   #可以定义字母
-</code></pre>
-          
+安装步骤 
+这里使用yum安装，但是必须先要替换yum源。首先修改yum源
+yum install yum install http://mirrors.sohu.com/fedora-epel/6/x86_64/epel-release-6-8.noarc
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/22/Ansibel入门实践-基础/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -975,7 +1007,7 @@ com.web[a..z]   #可以定义字母
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
