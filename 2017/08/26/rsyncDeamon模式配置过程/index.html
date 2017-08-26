@@ -94,18 +94,22 @@
 
 
 
-<meta name="description" content="rsync的Deamon模式搭建rsync服务端检查rsync软件包是否存在rpm -qa|grep &amp;quot;rsync&amp;quot; 编辑rsync的配置文件vim  /etc/rsyncd.conf uid = rsync #虚拟用户 远端的命令使用rsync访问共享目录 gid = rsync use chroot = no  #安全相关 max connections = 200 #最大">
+<meta name="description" content="rsync的Deamon模式 检查rsync软件包是否存在rpm -qa|grep &amp;quot;rsync&amp;quot; 编辑rsync的配置文件vim  /etc/rsyncd.conf uid = rsync #虚拟用户 远端的命令使用rsync访问共享目录 gid = rsync use chroot = no  #安全相关 max connections = 200 #最大连接数 timeo">
 <meta name="keywords" content="service">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rsyncDeamon模式配置过程">
 <meta property="og:url" content="https://seventeenwent.github.io/2017/08/26/rsyncDeamon模式配置过程/index.html">
 <meta property="og:site_name" content="温涛">
-<meta property="og:description" content="rsync的Deamon模式搭建rsync服务端检查rsync软件包是否存在rpm -qa|grep &amp;quot;rsync&amp;quot; 编辑rsync的配置文件vim  /etc/rsyncd.conf uid = rsync #虚拟用户 远端的命令使用rsync访问共享目录 gid = rsync use chroot = no  #安全相关 max connections = 200 #最大">
+<meta property="og:description" content="rsync的Deamon模式 检查rsync软件包是否存在rpm -qa|grep &amp;quot;rsync&amp;quot; 编辑rsync的配置文件vim  /etc/rsyncd.conf uid = rsync #虚拟用户 远端的命令使用rsync访问共享目录 gid = rsync use chroot = no  #安全相关 max connections = 200 #最大连接数 timeo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-26T08:06:53.025Z">
+<meta property="og:image" content="https://seventeenwent.github.io/rsync11.png">
+<meta property="og:image" content="https://seventeenwent.github.io/images/rsync5.gif">
+<meta property="og:image" content="https://seventeenwent.github.io/images/rsync6.gif">
+<meta property="og:updated_time" content="2017-08-26T08:35:35.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rsyncDeamon模式配置过程">
-<meta name="twitter:description" content="rsync的Deamon模式搭建rsync服务端检查rsync软件包是否存在rpm -qa|grep &amp;quot;rsync&amp;quot; 编辑rsync的配置文件vim  /etc/rsyncd.conf uid = rsync #虚拟用户 远端的命令使用rsync访问共享目录 gid = rsync use chroot = no  #安全相关 max connections = 200 #最大">
+<meta name="twitter:description" content="rsync的Deamon模式 检查rsync软件包是否存在rpm -qa|grep &amp;quot;rsync&amp;quot; 编辑rsync的配置文件vim  /etc/rsyncd.conf uid = rsync #虚拟用户 远端的命令使用rsync访问共享目录 gid = rsync use chroot = no  #安全相关 max connections = 200 #最大连接数 timeo">
+<meta name="twitter:image" content="https://seventeenwent.github.io/rsync11.png">
 
 
 
@@ -374,7 +378,8 @@
       
 
       
-        <h2 id="rsync的Deamon模式"><a href="#rsync的Deamon模式" class="headerlink" title="rsync的Deamon模式"></a>rsync的Deamon模式</h2><h2 id="搭建rsync服务端"><a href="#搭建rsync服务端" class="headerlink" title="搭建rsync服务端"></a>搭建rsync服务端</h2><h3 id="检查rsync软件包是否存在"><a href="#检查rsync软件包是否存在" class="headerlink" title="检查rsync软件包是否存在"></a>检查rsync软件包是否存在</h3><pre><code>rpm -qa|grep &quot;rsync&quot;
+        <h2 id="rsync的Deamon模式"><a href="#rsync的Deamon模式" class="headerlink" title="rsync的Deamon模式"></a>rsync的Deamon模式</h2><p><img src="../../../../rsync11.png" alt=""></p>
+<h3 id="检查rsync软件包是否存在"><a href="#检查rsync软件包是否存在" class="headerlink" title="检查rsync软件包是否存在"></a>检查rsync软件包是否存在</h3><pre><code>rpm -qa|grep &quot;rsync&quot;
 </code></pre><h3 id="编辑rsync的配置文件"><a href="#编辑rsync的配置文件" class="headerlink" title="编辑rsync的配置文件"></a>编辑rsync的配置文件</h3><pre><code>vim  /etc/rsyncd.conf
 uid = rsync #虚拟用户 远端的命令使用rsync访问共享目录
 gid = rsync
@@ -417,7 +422,8 @@ ls -l  /etc/rsync.password
 #检查rsync是否启动成功 rsync默认的端口号是873
 ls -lntup|grep &quot;rsync
 ps -ef|grep &quot;rsync&quot;
-</code></pre><p><img src="" alt=""></p>
+</code></pre><p><img src="../../../../images/rsync5.gif" alt=""></p>
+<p><img src="../../../../images/rsync6.gif" alt=""></p>
 <h2 id="rsync可能会出现的错误"><a href="#rsync可能会出现的错误" class="headerlink" title="rsync可能会出现的错误"></a>rsync可能会出现的错误</h2>
       
     </div>
@@ -590,7 +596,7 @@ ps -ef|grep &quot;rsync&quot;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync的Deamon模式"><span class="nav-number">1.</span> <span class="nav-text">rsync的Deamon模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建rsync服务端"><span class="nav-number">2.</span> <span class="nav-text">搭建rsync服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检查rsync软件包是否存在"><span class="nav-number">2.1.</span> <span class="nav-text">检查rsync软件包是否存在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑rsync的配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">编辑rsync的配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加一个虚拟用户"><span class="nav-number">2.3.</span> <span class="nav-text">添加一个虚拟用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建同步过来的文件存放的目录"><span class="nav-number">2.4.</span> <span class="nav-text">创建同步过来的文件存放的目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改模块下的-backup目录的权限"><span class="nav-number">2.5.</span> <span class="nav-text">修改模块下的/backup目录的权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建密码文件"><span class="nav-number">2.6.</span> <span class="nav-text">创建密码文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动rsync服务"><span class="nav-number">2.7.</span> <span class="nav-text">启动rsync服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync可能会出现的错误"><span class="nav-number">3.</span> <span class="nav-text">rsync可能会出现的错误</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync的Deamon模式"><span class="nav-number">1.</span> <span class="nav-text">rsync的Deamon模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检查rsync软件包是否存在"><span class="nav-number">1.1.</span> <span class="nav-text">检查rsync软件包是否存在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑rsync的配置文件"><span class="nav-number">1.2.</span> <span class="nav-text">编辑rsync的配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加一个虚拟用户"><span class="nav-number">1.3.</span> <span class="nav-text">添加一个虚拟用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建同步过来的文件存放的目录"><span class="nav-number">1.4.</span> <span class="nav-text">创建同步过来的文件存放的目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改模块下的-backup目录的权限"><span class="nav-number">1.5.</span> <span class="nav-text">修改模块下的/backup目录的权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建密码文件"><span class="nav-number">1.6.</span> <span class="nav-text">创建密码文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动rsync服务"><span class="nav-number">1.7.</span> <span class="nav-text">启动rsync服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync可能会出现的错误"><span class="nav-number">2.</span> <span class="nav-text">rsync可能会出现的错误</span></a></li></ol></div>
             
 
           </div>

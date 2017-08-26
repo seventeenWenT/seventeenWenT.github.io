@@ -378,10 +378,12 @@
       
         
           
-          rsync的Deamon模式搭建rsync服务端检查rsync软件包是否存在rpm -qa|grep &quot;rsync&quot;
+          rsync的Deamon模式
+检查rsync软件包是否存在rpm -qa|grep &quot;rsync&quot;
 编辑rsync的配置文件vim  /etc/rsyncd.conf
 uid = rsync #虚拟用户 远端的命令使用rsync访问共享目录
-gid = rsyn
+gid = rsync
+use chr
           ...
           <!--noindex-->
           <div class="post-button text-center">
