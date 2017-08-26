@@ -105,7 +105,10 @@
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync11.png">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync5.gif">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync6.gif">
-<meta property="og:updated_time" content="2017-08-26T08:37:12.902Z">
+<meta property="og:image" content="https://seventeenwent.github.io/images/rsync10.gif">
+<meta property="og:image" content="https://seventeenwent.github.io/images/rsync8.gif">
+<meta property="og:image" content="https://seventeenwent.github.io/images/rsync9.gif">
+<meta property="og:updated_time" content="2017-08-26T10:21:40.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rsyncDeamon模式配置过程">
 <meta name="twitter:description" content="rsync的Deamon模式 检查rsync软件包是否存在rpm -qa|grep &amp;quot;rsync&amp;quot; 编辑rsync的配置文件vim  /etc/rsyncd.conf uid = rsync #虚拟用户 远端的命令使用rsync访问共享目录 gid = rsync use chroot = no  #安全相关 max connections = 200 #最大连接数 timeo">
@@ -401,7 +404,7 @@ secrets file = /etc/rsync.password     #虚拟用户的密码
 </code></pre><blockquote>
 <p>uid和gid</p>
 </blockquote>
-<p>在Linux中，所有的软件和服务想要运行起来都需要一个用户。这是rsync程序的执行用户，rsync在运行起来时的用户就是rsync。</p>
+<p>在Linux中，所有的软件和服务想要运行起来都需要一个用户。这是rsync程序的执行用户，rsync在运行起来时的用户就是rsync。rsync在磁盘上</p>
 <blockquote>
 <p>[backup]</p>
 </blockquote>
@@ -424,7 +427,35 @@ ls -lntup|grep &quot;rsync
 ps -ef|grep &quot;rsync&quot;
 </code></pre><p><img src="../../../../images/rsync5.gif" alt=""></p>
 <p><img src="../../../../images/rsync6.gif" alt=""></p>
-<h2 id="rsync可能会出现的错误"><a href="#rsync可能会出现的错误" class="headerlink" title="rsync可能会出现的错误"></a>rsync可能会出现的错误</h2>
+<h2 id="rsync免密码传输文件"><a href="#rsync免密码传输文件" class="headerlink" title="rsync免密码传输文件"></a>rsync免密码传输文件</h2><h3 id="在客户端创建密码文件"><a href="#在客户端创建密码文件" class="headerlink" title="在客户端创建密码文件"></a>在客户端创建密码文件</h3><p>密码文件的内容只需要是纯密码就行</p>
+<pre><code>echo &quot;123456&quot;&gt;/etc/rsync.password
+</code></pre><h3 id="修改密码文件的权限位600"><a href="#修改密码文件的权限位600" class="headerlink" title="修改密码文件的权限位600"></a>修改密码文件的权限位600</h3><pre><code>chmod  600 /etc/rsync.password
+</code></pre><h3 id="测试是否成功"><a href="#测试是否成功" class="headerlink" title="测试是否成功"></a>测试是否成功</h3><p><img src="../../../../images/rsync10.gif" alt=""></p>
+<p>注意所有的操作都是在客户端上的</p>
+<h2 id="rsync多个模块配置"><a href="#rsync多个模块配置" class="headerlink" title="rsync多个模块配置"></a>rsync多个模块配置</h2><p><img src="../../../../images/rsync8.gif" alt=""></p>
+<p><img src="../../../../images/rsync9.gif" alt=""></p>
+<p>配置完成后</p>
+<pre><code>rsync -av /etc/hosts  seventeenwen@172.16.1.41::backup
+rsync -av /etc/hosts  seventeenwen@172.16.1.41::nfsbackup
+</code></pre><h2 id="rsync可能会出现的错误"><a href="#rsync可能会出现的错误" class="headerlink" title="rsync可能会出现的错误"></a>rsync可能会出现的错误</h2><h3 id="rsync-mkdir-“dir1”-in-backup-failed-Permission-denied-13"><a href="#rsync-mkdir-“dir1”-in-backup-failed-Permission-denied-13" class="headerlink" title="rsync: mkdir “dir1” (in backup) failed: Permission denied (13)"></a>rsync: mkdir “dir1” (in backup) failed: Permission denied (13)</h3><p>这是非常明显的权限错误，如果没有给rsync的服务端的文件存放目录授权会出现。</p>
+<pre><code>ls -ld  /backup
+drwxr-xr-x 2 root root 4096 Aug 26 16:24 /backup
+#注意现在的目录权限是root权限，rsync在目录下的权限是通过配置文件的uid用户来操作的，
+也就是rsync用户，rsync用户当让不能在目录下创建新文件了
+</code></pre><h3 id="rsync-failed-to-connect-to-172-16-1-41-No-route-to-host-113"><a href="#rsync-failed-to-connect-to-172-16-1-41-No-route-to-host-113" class="headerlink" title="rsync: failed to connect to 172.16.1.41: No route to host (113)"></a>rsync: failed to connect to 172.16.1.41: No route to host (113)</h3><p>出现这个错误的原因可以有很多，其中的一个原因就是防火墙没有关</p>
+<pre><code>/etc/init.d/iptables stop
+</code></pre><h3 id="ERROR-auth-failed-on-module-backup"><a href="#ERROR-auth-failed-on-module-backup" class="headerlink" title="@ERROR: auth failed on module backup"></a>@ERROR: auth failed on module backup</h3><p>显示认证backup模块失败了。这个错误很常见<br>原因一：</p>
+<pre><code>tail -1 /etc/rsyncd.conf
+secrets file=/etc/rs.pass
+ls -l  /etc/rs.pass
+-rw-r--r-- 1 root root 20 Aug 26 17:06 /etc/rs.pass
+#注意权限，密码文件的权限是644所以不安全
+将密码文件的权限提升到600就好了
+chmod 600  /etc/rs.pass
+ls -l /etc/rs.pass
+-rw------- 1 root root 20 Aug 26 17:06 /etc/rs.pass
+</code></pre><p>再次推送就OK了。</p>
+
       
     </div>
     
@@ -596,7 +627,7 @@ ps -ef|grep &quot;rsync&quot;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync的Deamon模式"><span class="nav-number">1.</span> <span class="nav-text">rsync的Deamon模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检查rsync软件包是否存在"><span class="nav-number">1.1.</span> <span class="nav-text">检查rsync软件包是否存在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑rsync的配置文件"><span class="nav-number">1.2.</span> <span class="nav-text">编辑rsync的配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加一个虚拟用户"><span class="nav-number">1.3.</span> <span class="nav-text">添加一个虚拟用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建同步过来的文件存放的目录"><span class="nav-number">1.4.</span> <span class="nav-text">创建同步过来的文件存放的目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改模块下的-backup目录的权限"><span class="nav-number">1.5.</span> <span class="nav-text">修改模块下的/backup目录的权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建密码文件"><span class="nav-number">1.6.</span> <span class="nav-text">创建密码文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动rsync服务"><span class="nav-number">1.7.</span> <span class="nav-text">启动rsync服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync可能会出现的错误"><span class="nav-number">2.</span> <span class="nav-text">rsync可能会出现的错误</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync的Deamon模式"><span class="nav-number">1.</span> <span class="nav-text">rsync的Deamon模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检查rsync软件包是否存在"><span class="nav-number">1.1.</span> <span class="nav-text">检查rsync软件包是否存在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑rsync的配置文件"><span class="nav-number">1.2.</span> <span class="nav-text">编辑rsync的配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加一个虚拟用户"><span class="nav-number">1.3.</span> <span class="nav-text">添加一个虚拟用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建同步过来的文件存放的目录"><span class="nav-number">1.4.</span> <span class="nav-text">创建同步过来的文件存放的目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改模块下的-backup目录的权限"><span class="nav-number">1.5.</span> <span class="nav-text">修改模块下的/backup目录的权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建密码文件"><span class="nav-number">1.6.</span> <span class="nav-text">创建密码文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动rsync服务"><span class="nav-number">1.7.</span> <span class="nav-text">启动rsync服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync免密码传输文件"><span class="nav-number">2.</span> <span class="nav-text">rsync免密码传输文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在客户端创建密码文件"><span class="nav-number">2.1.</span> <span class="nav-text">在客户端创建密码文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改密码文件的权限位600"><span class="nav-number">2.2.</span> <span class="nav-text">修改密码文件的权限位600</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试是否成功"><span class="nav-number">2.3.</span> <span class="nav-text">测试是否成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync多个模块配置"><span class="nav-number">3.</span> <span class="nav-text">rsync多个模块配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync可能会出现的错误"><span class="nav-number">4.</span> <span class="nav-text">rsync可能会出现的错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync-mkdir-“dir1”-in-backup-failed-Permission-denied-13"><span class="nav-number">4.1.</span> <span class="nav-text">rsync: mkdir “dir1” (in backup) failed: Permission denied (13)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync-failed-to-connect-to-172-16-1-41-No-route-to-host-113"><span class="nav-number">4.2.</span> <span class="nav-text">rsync: failed to connect to 172.16.1.41: No route to host (113)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ERROR-auth-failed-on-module-backup"><span class="nav-number">4.3.</span> <span class="nav-text">@ERROR: auth failed on module backup</span></a></li></ol></li></ol></div>
             
 
           </div>
