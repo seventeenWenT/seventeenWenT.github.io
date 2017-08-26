@@ -395,13 +395,34 @@ cp /demo/test.txt /tmp/testcp.txt
 <h3 id="rsync通过管道ssh传输数据"><a href="#rsync通过管道ssh传输数据" class="headerlink" title="rsync通过管道ssh传输数据"></a>rsync通过管道ssh传输数据</h3><pre><code>rsync backup 172.16.1.31:/tmp
 </code></pre><p><img src="../../../../images/rsync3.gif" alt=""></p>
 <div class="note danger"><p>rsync传输目录时的注意 </p></div>
-<p>通过rsync传输目录时需要注意传输的目录后面是否有/。</p>
-<ul>
-<li>如果是/dir/ 目录后面加上了斜线，只会将目录的内容复制到目标目录</li>
-<li>如果是/dir   则会将目录和目录的内容一起复制到目标目录</li>
-</ul>
-<h3 id="rsync的Daemon模式"><a href="#rsync的Daemon模式" class="headerlink" title="rsync的Daemon模式"></a>rsync的Daemon模式</h3><h2 id="rsync的参数列表"><a href="#rsync的参数列表" class="headerlink" title="rsync的参数列表"></a>rsync的参数列表</h2><p><img src="../../../../images/rsync.png" alt=""></p>
 
+通过rsync传输目录时需要注意传输的目录后面是否有/。
+
+- 如果是/dir/ 目录后面加上了斜线，只会将目录的内容复制到目标目录
+- 如果是/dir   则会将目录和目录的内容一起复制到目标目录
+
+
+
+<div class="note danger"><p>rsync需要注意的参数–delte </p></div>
+<p>  --<strong>delte</strong>需要特殊的注意，因为一个不小心就可能造成非常严重的后果所以需要特别注意。</p>
+<p><img src="../../../../images/rsync4.gif" alt=""></p>
+<p>操作步骤：</p>
+<pre><code>【nfs】
+touch {1..10}.log
+【backup】
+rsync -avz --delete /demo/ 172.16.1.31:/beifen
+</code></pre><p>参数说明：</p>
+<p>--delete:这个参数可以理解为强制使rsync的目标端和源端的内容一致。非常危险。一不小心就会清空整个备份。也可以说是你的本地目录是什么样子就会同步成什么样子.</p>
+<h3 id="rsync的Daemon模式"><a href="#rsync的Daemon模式" class="headerlink" title="rsync的Daemon模式"></a>rsync的Daemon模式</h3><h2 id="rsync的参数列表"><a href="#rsync的参数列表" class="headerlink" title="rsync的参数列表"></a>rsync的参数列表</h2><p><img src="../../../../images/rsync.png" alt=""></p>
+<h2 id="rsync的推送（pull）和拉取（push）"><a href="#rsync的推送（pull）和拉取（push）" class="headerlink" title="rsync的推送（pull）和拉取（push）"></a>rsync的推送（pull）和拉取（push）</h2><blockquote>
+<p>推送的意思是将数据从本地传输到远端</p>
+</blockquote>
+<pre><code>rsync -av /demo   172.16.1.31:/beifen
+</code></pre><blockquote>
+<p>拉取的意思是将数据从远端传输到本地</p>
+</blockquote>
+<pre><code>rsync -av  172.16.1.31:/beifen  /demo
+</code></pre>
           
         
       

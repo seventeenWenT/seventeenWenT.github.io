@@ -105,8 +105,9 @@
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync1.gif">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync2.gif">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync3.gif">
+<meta property="og:image" content="https://seventeenwent.github.io/images/rsync4.gif">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync.png">
-<meta property="og:updated_time" content="2017-08-25T09:20:15.752Z">
+<meta property="og:updated_time" content="2017-08-26T05:55:34.380Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rsync详细笔记">
 <meta name="twitter:description" content="rsync的版本[root@backup ~]# cat /etc/redhat-release CentOS release 6.9 (Final) [root@backup ~]# uname -r 2.6.32-696.el6.x86_64 [root@backup ~]# rpm -qa|grep rsync rsync-3.0.6-12.el6.x86_64 rsync的三种工作模式rs">
@@ -396,13 +397,34 @@ cp /demo/test.txt /tmp/testcp.txt
 <h3 id="rsync通过管道ssh传输数据"><a href="#rsync通过管道ssh传输数据" class="headerlink" title="rsync通过管道ssh传输数据"></a>rsync通过管道ssh传输数据</h3><pre><code>rsync backup 172.16.1.31:/tmp
 </code></pre><p><img src="../../../../images/rsync3.gif" alt=""></p>
 <div class="note danger"><p>rsync传输目录时的注意 </p></div>
-<p>通过rsync传输目录时需要注意传输的目录后面是否有/。</p>
-<ul>
-<li>如果是/dir/ 目录后面加上了斜线，只会将目录的内容复制到目标目录</li>
-<li>如果是/dir   则会将目录和目录的内容一起复制到目标目录</li>
-</ul>
-<h3 id="rsync的Daemon模式"><a href="#rsync的Daemon模式" class="headerlink" title="rsync的Daemon模式"></a>rsync的Daemon模式</h3><h2 id="rsync的参数列表"><a href="#rsync的参数列表" class="headerlink" title="rsync的参数列表"></a>rsync的参数列表</h2><p><img src="../../../../images/rsync.png" alt=""></p>
 
+通过rsync传输目录时需要注意传输的目录后面是否有/。
+
+- 如果是/dir/ 目录后面加上了斜线，只会将目录的内容复制到目标目录
+- 如果是/dir   则会将目录和目录的内容一起复制到目标目录
+
+
+
+<div class="note danger"><p>rsync需要注意的参数–delte </p></div>
+<p>  --<strong>delte</strong>需要特殊的注意，因为一个不小心就可能造成非常严重的后果所以需要特别注意。</p>
+<p><img src="../../../../images/rsync4.gif" alt=""></p>
+<p>操作步骤：</p>
+<pre><code>【nfs】
+touch {1..10}.log
+【backup】
+rsync -avz --delete /demo/ 172.16.1.31:/beifen
+</code></pre><p>参数说明：</p>
+<p>--delete:这个参数可以理解为强制使rsync的目标端和源端的内容一致。非常危险。一不小心就会清空整个备份。也可以说是你的本地目录是什么样子就会同步成什么样子.</p>
+<h3 id="rsync的Daemon模式"><a href="#rsync的Daemon模式" class="headerlink" title="rsync的Daemon模式"></a>rsync的Daemon模式</h3><h2 id="rsync的参数列表"><a href="#rsync的参数列表" class="headerlink" title="rsync的参数列表"></a>rsync的参数列表</h2><p><img src="../../../../images/rsync.png" alt=""></p>
+<h2 id="rsync的推送（pull）和拉取（push）"><a href="#rsync的推送（pull）和拉取（push）" class="headerlink" title="rsync的推送（pull）和拉取（push）"></a>rsync的推送（pull）和拉取（push）</h2><blockquote>
+<p>推送的意思是将数据从本地传输到远端</p>
+</blockquote>
+<pre><code>rsync -av /demo   172.16.1.31:/beifen
+</code></pre><blockquote>
+<p>拉取的意思是将数据从远端传输到本地</p>
+</blockquote>
+<pre><code>rsync -av  172.16.1.31:/beifen  /demo
+</code></pre>
       
     </div>
     
@@ -574,7 +596,7 @@ cp /demo/test.txt /tmp/testcp.txt
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync的版本"><span class="nav-number">1.</span> <span class="nav-text">rsync的版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync的三种工作模式"><span class="nav-number">2.</span> <span class="nav-text">rsync的三种工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync的本地工作模式"><span class="nav-number">2.1.</span> <span class="nav-text">rsync的本地工作模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync通过管道ssh传输数据"><span class="nav-number">2.2.</span> <span class="nav-text">rsync通过管道ssh传输数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync的Daemon模式"><span class="nav-number">2.3.</span> <span class="nav-text">rsync的Daemon模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync的参数列表"><span class="nav-number">3.</span> <span class="nav-text">rsync的参数列表</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync的版本"><span class="nav-number">1.</span> <span class="nav-text">rsync的版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync的三种工作模式"><span class="nav-number">2.</span> <span class="nav-text">rsync的三种工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync的本地工作模式"><span class="nav-number">2.1.</span> <span class="nav-text">rsync的本地工作模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync通过管道ssh传输数据"><span class="nav-number">2.2.</span> <span class="nav-text">rsync通过管道ssh传输数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync的Daemon模式"><span class="nav-number">2.3.</span> <span class="nav-text">rsync的Daemon模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync的参数列表"><span class="nav-number">3.</span> <span class="nav-text">rsync的参数列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync的推送（pull）和拉取（push）"><span class="nav-number">4.</span> <span class="nav-text">rsync的推送（pull）和拉取（push）</span></a></li></ol></div>
             
 
           </div>
