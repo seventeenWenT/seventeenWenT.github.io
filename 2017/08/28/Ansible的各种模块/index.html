@@ -104,7 +104,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://seventeenwent.github.io/images/ansible/command.png">
 <meta property="og:image" content="https://seventeenwent.github.io/images/ansible/ansible1.gif">
-<meta property="og:updated_time" content="2017-08-28T15:22:08.775Z">
+<meta property="og:updated_time" content="2017-08-28T16:54:44.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ansible的各种模块">
 <meta name="twitter:description" content="Ansible的基础模块Ansible的command模块这个模块是Ansible比较简单的模块，但是需要注意的是Ansible的command并不支持”&amp;gt;”,”&amp;lt;”,”|”,”;”,”&amp;amp;”，官方文档也给了比较明确的替代方案，就是使用shell模块来代替,command模块是默认执行的模块 ansible node1 -m command -a whoami     参数 re">
@@ -462,20 +462,18 @@ ansible backup -a &quot;ls -l /tmp/demo.txt&quot;
 </tbody>
 </table>
 <p>可以从远程复制到本地，也可以从本地复制到远程。</p>
-<div class="note info"><p>将本地的/tmp目录下demo.txt复制到backup服务器上的backup目录，权限是600，用户是wen </p></div>
-
-
-    ansible backup -m copy -a "src=/tmp/demo.txt dest=/backup/ mode=600 owner=wen group=wen"
-    ansible backup -a "ls -l /backup/demo.txt"
-    172.16.1.42 | SUCCESS | rc=0 >>
-    -rw------- 1 wen wen 4 Aug 28 19:52        /backup/demo.txt
-
-
-要注意的是修改的所属用户必须要存在。
-
-
-<div class="note info"><p>将本地的/var/www/目录复制到backup服务器上的backup下 </p></div>
-<pre><code>ansible backup -m copy -a &quot;src=/var/www dest=/backup&quot;
+<blockquote>
+<p>将本地的/tmp目录下demo.txt复制到backup服务器上的backup目录，权限是600，用户是wen</p>
+</blockquote>
+<pre><code>ansible backup -m copy -a &quot;src=/tmp/demo.txt dest=/backup/ mode=600 owner=wen group=wen&quot;
+ansible backup -a &quot;ls -l /backup/demo.txt&quot;
+172.16.1.42 | SUCCESS | rc=0 &gt;&gt;
+-rw------- 1 wen wen 4 Aug 28 19:52        /backup/demo.txt
+</code></pre><p>要注意的是修改的所属用户必须要存在。</p>
+<blockquote>
+<p> 将本地的/var/www/目录复制到backup服务器上的backup下</p>
+</blockquote>
+<pre><code>121ansible backup -m copy -a &quot;src=/var/www dest=/backup&quot;
 ansible backup -a &quot;ls -ld /backup/www&quot;
 172.16.1.42 | SUCCESS | rc=0 &gt;&gt;
 drwxr-xr-x 2 root root 4096 Aug 28 19:56 /backup/www
@@ -534,48 +532,77 @@ libssh2-1.4.2-2.el6_7.1.x86_64
 </tr>
 </tbody>
 </table>
-<div class="note info"><p>在远端服务器上创建一个新文件/backup/demo.txt </p></div>
-
-
-    ansible backup -m file -a "path=/backup/demo.txt state=touch"
-    ansible backup -a "ls -l  /backup"
-    172.16.1.42 | SUCCESS | rc=0 >>
-    total 0
-    -rw-r--r-- 1 root root 0 Aug 28 22:11 demo.txt
-
-<div class="note info"><p>修改远端服务器上的新文件/backup/demo.txt的属主为wen，权限为600 </p></div>
+<blockquote>
+<p> 在远端服务器上创建一个新文件/backup/demo.txt</p>
+</blockquote>
+<pre><code>ansible backup -m file -a &quot;path=/backup/demo.txt state=touch&quot;
+ansible backup -a &quot;ls -l  /backup&quot;
+172.16.1.42 | SUCCESS | rc=0 &gt;&gt;
+total 0
+-rw-r--r-- 1 root root 0 Aug 28 22:11 demo.txt
+</code></pre><blockquote>
+<p>修改远端服务器上的新文件/backup/demo.txt的属主为wen，权限为600</p>
+</blockquote>
 <pre><code>ansible backup -m file -a &quot;path=/backup/demo.txt mode=600 group=wen owner=wen&quot;
 ansible backup -a &quot;ls -l /backup&quot;
 172.16.1.42 | SUCCESS | rc=0 &gt;&gt;
 total 0
 -rw------- 1 wen wen 0 Aug 28 22:11 demo.txt
-</code></pre><div class="note info"><p>为backup服务器上新创建的demo.txt文件创建一个软链接文件demo_soft  </p></div>
-
-
-    ansible backup -m file -a "src=/backup/demo.txt dest=/backup/demo_soft state=link "
-    ansible backup -a "ls -l /backup"
-    172.16.1.42 | SUCCESS | rc=0 >>
-    total 0
-    lrwxrwxrwx 1 root root 16 Aug 28 22:24 demo_soft ->         /backup/demo.txt
-    -rw------- 1 wen  wen   0 Aug 28 22:11 demo.txt
-
-
-## Ansible的cron模块
-
-|     参数    |           含义              |
-| ------- | ------------------------------ |
-| backup  | yes的话会创建一个crontab的备份 |
-| day     | 天：1-31，*，*/2               |
-| hour    | 小时:0-23，*，*/6              |
-| minute  | 分钟:0-59,*,*/10               |
-| month   | 月：1-12，*，*/2               |
-| weekday | 0-6                            |
-| job     | 指定运行的命令                 |
-| user    | 以哪个用户的身份运行           |
-
-
-
-<div class="note info"><p>设置一个定时任务每分钟先/backup/demo.txt文件输入一个“hello” </p></div>
+</code></pre><blockquote>
+<p>为backup服务器上新创建的demo.txt文件创建一个软链接文件demo_soft</p>
+</blockquote>
+<pre><code>ansible backup -m file -a &quot;src=/backup/demo.txt dest=/backup/demo_soft state=link &quot;
+ansible backup -a &quot;ls -l /backup&quot;
+172.16.1.42 | SUCCESS | rc=0 &gt;&gt;
+total 0
+lrwxrwxrwx 1 root root 16 Aug 28 22:24 demo_soft -&gt;/backup/demo.txt
+-rw------- 1 wen  wen   0 Aug 28 22:11 demo.txt
+</code></pre><h2 id="Ansible的cron模块"><a href="#Ansible的cron模块" class="headerlink" title="Ansible的cron模块"></a>Ansible的cron模块</h2><p>Ansible的定时任务模块和Crond的定时任务的差别不大</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backup</td>
+<td>yes的话会创建一个crontab的备份</td>
+</tr>
+<tr>
+<td>day</td>
+<td>天：1-31，<em>，</em>/2</td>
+</tr>
+<tr>
+<td>hour</td>
+<td>小时:0-23，<em>，</em>/6</td>
+</tr>
+<tr>
+<td>minute</td>
+<td>分钟:0-59,<em>,</em>/10</td>
+</tr>
+<tr>
+<td>month</td>
+<td>月：1-12，<em>，</em>/2</td>
+</tr>
+<tr>
+<td>weekday</td>
+<td>0-6</td>
+</tr>
+<tr>
+<td>job</td>
+<td>指定运行的命令</td>
+</tr>
+<tr>
+<td>user</td>
+<td>以哪个用户的身份运行</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>设置一个定时任务每分钟先/backup/demo.txt文件输入一个“hello”</p>
+</blockquote>
 <pre><code>ansible  backup -m cron -a &apos;name=test month=* minute=* hour=* day=* weekday=* job=&quot;/bin/echo &quot;hello&quot; &gt;&gt; /backup/demo.txt&quot;&apos;
 </code></pre><h2 id="Ansible的user模块"><a href="#Ansible的user模块" class="headerlink" title="Ansible的user模块"></a>Ansible的user模块</h2><table>
 <thead>
@@ -623,7 +650,9 @@ total 0
 </tr>
 </tbody>
 </table>
-<div class="note info"><p>创建一个用户test，不设置用户的家目录，id号是888</p></div>
+<blockquote>
+<p>创建一个用户test，不设置用户的家目录，id号是888</p>
+</blockquote>
 <pre><code>ansible backup -m user -a &quot;name=test uid=888 shell=/sbin/nologin createhome=no&quot;
 ansible backup -a &quot;tail -1 /etc/passwd&quot;
 172.16.1.42 | SUCCESS | rc=0 &gt;&gt;
@@ -800,7 +829,7 @@ test:x:888:888::/home/test:/sbin/nologin
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ansible的基础模块"><span class="nav-number">1.</span> <span class="nav-text">Ansible的基础模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的command模块"><span class="nav-number">1.1.</span> <span class="nav-text">Ansible的command模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的copy模块"><span class="nav-number">1.2.</span> <span class="nav-text">Ansible的copy模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的shell模块"><span class="nav-number">1.3.</span> <span class="nav-text">Ansible的shell模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的scripts模块"><span class="nav-number">1.4.</span> <span class="nav-text">Ansible的scripts模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的file模块"><span class="nav-number">1.5.</span> <span class="nav-text">Ansible的file模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的user模块"><span class="nav-number">1.6.</span> <span class="nav-text">Ansible的user模块</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ansible的基础模块"><span class="nav-number">1.</span> <span class="nav-text">Ansible的基础模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的command模块"><span class="nav-number">1.1.</span> <span class="nav-text">Ansible的command模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的copy模块"><span class="nav-number">1.2.</span> <span class="nav-text">Ansible的copy模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的shell模块"><span class="nav-number">1.3.</span> <span class="nav-text">Ansible的shell模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的scripts模块"><span class="nav-number">1.4.</span> <span class="nav-text">Ansible的scripts模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的file模块"><span class="nav-number">1.5.</span> <span class="nav-text">Ansible的file模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的cron模块"><span class="nav-number">1.6.</span> <span class="nav-text">Ansible的cron模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的user模块"><span class="nav-number">1.7.</span> <span class="nav-text">Ansible的user模块</span></a></li></ol></li></ol></div>
             
 
           </div>
