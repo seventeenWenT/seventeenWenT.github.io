@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync3.gif">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync4.gif">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync.png">
-<meta property="og:updated_time" content="2017-08-26T08:06:11.679Z">
+<meta property="og:updated_time" content="2017-08-26T10:35:30.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rsync详细笔记">
 <meta name="twitter:description" content="rsync的版本[root@backup ~]# cat /etc/redhat-release CentOS release 6.9 (Final) [root@backup ~]# uname -r 2.6.32-696.el6.x86_64 [root@backup ~]# rpm -qa|grep rsync rsync-3.0.6-12.el6.x86_64 rsync的三种工作模式rs">
@@ -353,6 +353,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/service/" itemprop="url" rel="index">
+                    <span itemprop="name">service</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -401,6 +423,7 @@ cp /demo/test.txt /tmp/testcp.txt
 通过rsync传输目录时需要注意传输的目录后面是否有/。
 
 - 如果是/dir/ 目录后面加上了斜线，只会将目录的内容复制到目标目录
+
 - 如果是/dir   则会将目录和目录的内容一起复制到目标目录
 
 
@@ -544,7 +567,7 @@ rsync -avz --delete /demo/ 172.16.1.31:/beifen
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -555,7 +578,7 @@ rsync -avz --delete /demo/ 172.16.1.31:/beifen
             
             <div class="site-state-item site-state-categories">
               <a href="/service/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

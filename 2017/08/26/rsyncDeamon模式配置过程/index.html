@@ -107,8 +107,7 @@
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync6.gif">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync10.gif">
 <meta property="og:image" content="https://seventeenwent.github.io/images/rsync8.gif">
-<meta property="og:image" content="https://seventeenwent.github.io/images/rsync9.gif">
-<meta property="og:updated_time" content="2017-08-26T10:21:40.698Z">
+<meta property="og:updated_time" content="2017-08-26T10:35:12.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rsyncDeamon模式配置过程">
 <meta name="twitter:description" content="rsync的Deamon模式 检查rsync软件包是否存在rpm -qa|grep &amp;quot;rsync&amp;quot; 编辑rsync的配置文件vim  /etc/rsyncd.conf uid = rsync #虚拟用户 远端的命令使用rsync访问共享目录 gid = rsync use chroot = no  #安全相关 max connections = 200 #最大连接数 timeo">
@@ -354,6 +353,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/service/" itemprop="url" rel="index">
+                    <span itemprop="name">service</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -433,7 +454,6 @@ ps -ef|grep &quot;rsync&quot;
 </code></pre><h3 id="测试是否成功"><a href="#测试是否成功" class="headerlink" title="测试是否成功"></a>测试是否成功</h3><p><img src="../../../../images/rsync10.gif" alt=""></p>
 <p>注意所有的操作都是在客户端上的</p>
 <h2 id="rsync多个模块配置"><a href="#rsync多个模块配置" class="headerlink" title="rsync多个模块配置"></a>rsync多个模块配置</h2><p><img src="../../../../images/rsync8.gif" alt=""></p>
-<p><img src="../../../../images/rsync9.gif" alt=""></p>
 <p>配置完成后</p>
 <pre><code>rsync -av /etc/hosts  seventeenwen@172.16.1.41::backup
 rsync -av /etc/hosts  seventeenwen@172.16.1.41::nfsbackup
@@ -494,6 +514,10 @@ ls -l /etc/rs.pass
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/28/Ansible的各种模块/" rel="prev" title="Ansible的各种模块">
+                Ansible的各种模块 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -570,7 +594,7 @@ ls -l /etc/rs.pass
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -581,7 +605,7 @@ ls -l /etc/rs.pass
             
             <div class="site-state-item site-state-categories">
               <a href="/service/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

@@ -94,20 +94,21 @@
 
 
 
-<meta name="description" content="Ansible的入门实践  Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式命令的格式： ansible &amp;lt;pattern_goes_here&amp;gt; -m &amp;lt;module_name&amp;gt;s -a &amp;lt;arguments&amp;gt; 通过pattern来寻找要执行命令的主机类似： [root@mananger /]# grep &amp;quot;model02&amp;quo">
+<meta name="description" content="Ansible的基础模块Ansible的command模块这个模块是Ansible比较简单的模块，但是需要注意的是Ansible的command并不支持”&amp;gt;”,”&amp;lt;”,”|”,”;”,”&amp;amp;”，官方文档也给了比较明确的替代方案，就是使用shell模块来代替,command模块是默认执行的模块 ansible node1 -m command -a whoami     参数 re">
 <meta name="keywords" content="service">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ansible入门实践-Patterns模式">
-<meta property="og:url" content="https://seventeenwent.github.io/2017/08/24/Ansible入门实践-Patterns模式/index.html">
+<meta property="og:title" content="Ansible的各种模块">
+<meta property="og:url" content="https://seventeenwent.github.io/2017/08/28/Ansible的各种模块/index.html">
 <meta property="og:site_name" content="温涛">
-<meta property="og:description" content="Ansible的入门实践  Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式命令的格式： ansible &amp;lt;pattern_goes_here&amp;gt; -m &amp;lt;module_name&amp;gt;s -a &amp;lt;arguments&amp;gt; 通过pattern来寻找要执行命令的主机类似： [root@mananger /]# grep &amp;quot;model02&amp;quo">
+<meta property="og:description" content="Ansible的基础模块Ansible的command模块这个模块是Ansible比较简单的模块，但是需要注意的是Ansible的command并不支持”&amp;gt;”,”&amp;lt;”,”|”,”;”,”&amp;amp;”，官方文档也给了比较明确的替代方案，就是使用shell模块来代替,command模块是默认执行的模块 ansible node1 -m command -a whoami     参数 re">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://seventeenwent.github.io/img/ansible2.gif.gif">
-<meta property="og:updated_time" content="2017-08-25T08:41:08.626Z">
+<meta property="og:image" content="https://seventeenwent.github.io/images/ansible/command.png">
+<meta property="og:image" content="https://seventeenwent.github.io/images/ansible/ansible1.gif">
+<meta property="og:updated_time" content="2017-08-28T14:34:09.911Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ansible入门实践-Patterns模式">
-<meta name="twitter:description" content="Ansible的入门实践  Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式命令的格式： ansible &amp;lt;pattern_goes_here&amp;gt; -m &amp;lt;module_name&amp;gt;s -a &amp;lt;arguments&amp;gt; 通过pattern来寻找要执行命令的主机类似： [root@mananger /]# grep &amp;quot;model02&amp;quo">
-<meta name="twitter:image" content="https://seventeenwent.github.io/img/ansible2.gif.gif">
+<meta name="twitter:title" content="Ansible的各种模块">
+<meta name="twitter:description" content="Ansible的基础模块Ansible的command模块这个模块是Ansible比较简单的模块，但是需要注意的是Ansible的command并不支持”&amp;gt;”,”&amp;lt;”,”|”,”;”,”&amp;amp;”，官方文档也给了比较明确的替代方案，就是使用shell模块来代替,command模块是默认执行的模块 ansible node1 -m command -a whoami     参数 re">
+<meta name="twitter:image" content="https://seventeenwent.github.io/images/ansible/command.png">
 
 
 
@@ -136,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="https://seventeenwent.github.io/2017/08/24/Ansible入门实践-Patterns模式/"/>
+  <link rel="canonical" href="https://seventeenwent.github.io/2017/08/28/Ansible的各种模块/"/>
 
 
 
 
 
-  <title>Ansible入门实践-Patterns模式 | 温涛</title>
+  <title>Ansible的各种模块 | 温涛</title>
   
 
 
@@ -309,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://seventeenwent.github.io/2017/08/24/Ansible入门实践-Patterns模式/">
+    <link itemprop="mainEntityOfPage" href="https://seventeenwent.github.io/2017/08/28/Ansible的各种模块/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="温涛">
@@ -326,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Ansible入门实践-Patterns模式</h1>
+          <h1 class="post-title" itemprop="name headline">Ansible的各种模块</h1>
         
 
         <div class="post-meta">
@@ -338,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-24T08:16:01+08:00">
-                2017-08-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-28T16:07:57+08:00">
+                2017-08-28
               </time>
             
 
@@ -376,53 +377,184 @@
       
 
       
-        <h2 id=""><a href="#" class="headerlink" title=""></a><blockquote class="blockquote-center"><p>Ansible的入门实践 </p>
-</blockquote></h2><p>Ansible的Patterns是用来寻找主机。类似找谁，干什么的格式<br>命令的格式：</p>
-<pre><code>ansible &lt;pattern_goes_here&gt; -m &lt;module_name&gt;s -a &lt;arguments&gt;
-</code></pre><p>通过pattern来寻找要执行命令的主机<br>类似：</p>
-<pre><code>[root@mananger /]# grep &quot;model02&quot; /etc/ansible/hosts  -C4
-[webserver]
-10.0.0.17[2:3]
-[model02]
-10.0.0.172
-</code></pre><p>执行命令：</p>
-<pre><code>[root@mananger /]# ansible model02 -m ping
-10.0.0.172 | SUCCESS =&gt; {
-&quot;changed&quot;: false,
-&quot;ping&quot;: &quot;pong&quot;
-}
-</code></pre><p>无论如何都要告诉ansible要指定给那台主机执行命令</p>
-<p>指定*或者all代表所有机器</p>
-<p>通过指定IP地址来来进行管理</p>
-<pre><code>[root@mananger /]# ansible 10.0.0.172 -m ping
-10.0.0.172 | SUCCESS =&gt; {
-&quot;changed&quot;: false,
-&quot;ping&quot;: &quot;pong&quot;
-</code></pre><p>}</p>
-<p>通过！来排除某些组</p>
-<p>通过：来分隔多个组</p>
-<pre><code>[root@mananger /]# ansible model01:model02 -m ping
-10.0.0.172 | SUCCESS =&gt; {
-&quot;changed&quot;: false,
-&quot;ping&quot;: &quot;pong&quot;
-}
-10.0.0.173 | SUCCESS =&gt; {
-&quot;changed&quot;: false,
-&quot;ping&quot;: &quot;pong&quot;
-}
-</code></pre><p>可以通过正则表达式来匹配，只不过正则表达式要用~开头</p>
-<pre><code>[root@mananger /]# ansible ~model[0-9]{2} -m ping
-10.0.0.172 | SUCCESS =&gt; {
-&quot;changed&quot;: false,
-&quot;ping&quot;: &quot;pong&quot;
-}
-10.0.0.173 | SUCCESS =&gt; {
-&quot;changed&quot;: false,
-&quot;ping&quot;: &quot;pong&quot;
-}
-</code></pre><p><img src="../../../../img/ansible2.gif.gif" alt=""></p>
-<div class="note info"><p>Ansible </p></div>
+        <h1 id="Ansible的基础模块"><a href="#Ansible的基础模块" class="headerlink" title="Ansible的基础模块"></a>Ansible的基础模块</h1><h2 id="Ansible的command模块"><a href="#Ansible的command模块" class="headerlink" title="Ansible的command模块"></a>Ansible的command模块</h2><p>这个模块是Ansible比较简单的模块，但是需要注意的是Ansible的command并不支持”&gt;”,”&lt;”,”|”,”;”,”&amp;”，官方文档也给了比较明确的替代方案，就是使用shell模块来代替,command模块是默认执行的模块</p>
+<pre><code>ansible node1 -m command -a whoami
+</code></pre><p><img src="../../../../images/ansible/command.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>required</th>
+<th>comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chdir</td>
+<td>no</td>
+<td>运行命令前先进入到这个目录</td>
+</tr>
+<tr>
+<td>creates</td>
+<td>no</td>
+<td>如果这个参数的文件存在，则不运行命令</td>
+</tr>
+<tr>
+<td>executable</td>
+<td>no</td>
+<td>将shell切换成command执行</td>
+</tr>
+<tr>
+<td>removes</td>
+<td>no</td>
+<td>如果这个参数的文件不存在，则不运行这个命令</td>
+</tr>
+</tbody>
+</table>
+<p>常用的mv，cp，rm命令其实都支持。但是Ansible推荐使用file模块来代替。</p>
+<p><img src="../../../../images/ansible/ansible1.gif" alt=""></p>
+<h2 id="Ansible的copy模块"><a href="#Ansible的copy模块" class="headerlink" title="Ansible的copy模块"></a>Ansible的copy模块</h2><pre><code>Copies files to remote locations
+</code></pre><p>复制文件到远程机器<br>copy模块是用来复制文件到远程主机的，类似scp。最简单的copy模块的使用方法是：</p>
+<pre><code>ansible backup -m copy -a &quot;src=/backup/demo.txt dest=/tmp&quot;
+ansible backup -a &quot;ls -l /tmp/demo.txt&quot;
+172.16.1.42 | SUCCESS | rc=0 &gt;&gt;
+-rw-r--r-- 1 root root 0 Aug 28 18:45 /tmp/demo.
+</code></pre><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>src</td>
+<td>复制到远程主机的文件的路径，可以是相对路径，如果是一个目录，会递归的复制目录下的内容，如果路径的结尾包含一个/就复制目录下的内容而不复制目录。如果路径的结尾不包含/，会将目录本身也复制过去。</td>
+</tr>
+<tr>
+<td>dest</td>
+<td>复制到远程主机的路径，如果复制过去的是个目录，那么远程主机的地址也是一个目录</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>指定文件属于哪个用户</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>修改文件的权限，类似chmod  744</td>
+</tr>
+<tr>
+<td>group</td>
+<td>修改文件的属组</td>
+</tr>
+<tr>
+<td>force</td>
+<td>如果目标主机包含该文件，但内容不同，如果设置为yes，则强制覆盖，如果设置为no，则只有当目标主机的目标位置不存在该文件时，才复制。默认为yes</td>
+</tr>
+<tr>
+<td>content</td>
+<td>content里面的内容会被复制到dest的文件中</td>
+</tr>
+<tr>
+<td>backup</td>
+<td>创建一个备份用时间戳作为文件名的备份文件 默认是no</td>
+</tr>
+</tbody>
+</table>
+<p>可以从远程复制到本地，也可以从本地复制到远程。</p>
+<div class="note info"><p>将本地的/tmp目录下demo.txt复制到backup服务器上的backup目录，权限是600，用户是wen </p></div>
 
+    ansible backup -m copy -a "src=/tmp/demo.txt dest=/backup/ mode=600 owner=wen group=wen"
+    ansible backup -a "ls -l /backup/demo.txt"
+    172.16.1.42 | SUCCESS | rc=0 >>
+    -rw------- 1 wen wen 4 Aug 28 19:52        /backup/demo.txt
+
+要注意的是修改的所属用户必须要存在。
+
+
+<div class="note info"><p>将本地的/var/www/目录复制到backup服务器上的backup下 </p></div>
+<pre><code>ansible backup -m copy -a &quot;src=/var/www dest=/backup&quot;
+ansible backup -a &quot;ls -ld /backup/www&quot;
+172.16.1.42 | SUCCESS | rc=0 &gt;&gt;
+drwxr-xr-x 2 root root 4096 Aug 28 19:56 /backup/www
+</code></pre><p>这里需要注意的是关于复制时的/问题，<strong>加上/就是将目录下面的内容复制过去，不加/，会将目录本身一起复制过去</strong></p>
+<h2 id="Ansible的shell模块"><a href="#Ansible的shell模块" class="headerlink" title="Ansible的shell模块"></a>Ansible的shell模块</h2><p>shell模块与command模块的区别不大，只是shell模块是支持管道符的</p>
+<pre><code>ansible backup -m shell -a &quot;rpm -qa|grep &apos;ssh&apos;&quot;
+
+172.16.1.42 | SUCCESS | rc=0 &gt;&gt;
+openssh-clients-5.3p1-122.el6.x86_64
+openssh-5.3p1-122.el6.x86_64
+openssh-server-5.3p1-122.el6.x86_64
+libssh2-1.4.2-2.el6_7.1.x86_64
+</code></pre><p>shell模块还可以运行脚本。</p>
+<h2 id="Ansible的scripts模块"><a href="#Ansible的scripts模块" class="headerlink" title="Ansible的scripts模块"></a>Ansible的scripts模块</h2><p>scripts 模块是将本地的脚本先复制到远程主机，然后在远程主机上运行的</p>
+<pre><code>ansible backup -m script -a &quot;/server/scripts/cowsay.sh&quot;
+</code></pre><h2 id="Ansible的file模块"><a href="#Ansible的file模块" class="headerlink" title="Ansible的file模块"></a>Ansible的file模块</h2><p>Ansible的文件模块，主要是用来操作文件的相关操作。可以为文件创建连接</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td>定义文件或者目录的存放位置</td>
+</tr>
+<tr>
+<td>group</td>
+<td>定义文件的属组</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>定义文件的权限</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>定义文件的属主</td>
+</tr>
+<tr>
+<td>recurse</td>
+<td>递归设置文件的属性，只对目录有效</td>
+</tr>
+<tr>
+<td>src</td>
+<td>被连接的源文件</td>
+</tr>
+<tr>
+<td>dest</td>
+<td>被连接的源文件</td>
+</tr>
+<tr>
+<td>state</td>
+<td>directory：如果目录不存在就创建目录；file 即使文件不存在，也不会创建；link创建一个软链接；hard 创建一个硬链接；touch 如果文件不存在就会创建一个新文件，如果文件存在就会更新最后修改时间；absent：删除目录，文件，软链接</td>
+</tr>
+</tbody>
+</table>
+<div class="note info"><p>在远端服务器上创建一个新文件/backup/demo.txt </p></div>
+
+
+    ansible backup -m file -a "path=/backup/demo.txt state=touch"
+    ansible backup -a "ls -l  /backup"
+    172.16.1.42 | SUCCESS | rc=0 >>
+    total 0
+    -rw-r--r-- 1 root root 0 Aug 28 22:11 demo.txt
+
+<div class="note info"><p>修改远端服务器上的新文件/backup/demo.txt的属主为wen，权限为600 </p></div>
+<pre><code>ansible backup -m file -a &quot;path=/backup/demo.txt mode=600 group=wen owner=wen&quot;
+ansible backup -a &quot;ls -l /backup&quot;
+172.16.1.42 | SUCCESS | rc=0 &gt;&gt;
+total 0
+-rw------- 1 wen wen 0 Aug 28 22:11 demo.txt
+</code></pre><div class="note info"><p>为backup服务器上新创建的demo.txt文件创建一个软链接文件demo_soft  </p></div>
+<pre><code>ansible backup -m file -a &quot;src=/backup/demo.txt dest=/backup/demo_soft state=link &quot;
+ansible backup -a &quot;ls -l /backup&quot;
+172.16.1.42 | SUCCESS | rc=0 &gt;&gt;
+total 0
+lrwxrwxrwx 1 root root 16 Aug 28 22:24 demo_soft -&gt;         /backup/demo.txt
+-rw------- 1 wen  wen   0 Aug 28 22:11 demo.txt
+</code></pre><h2 id="Ansible的cron模块"><a href="#Ansible的cron模块" class="headerlink" title="Ansible的cron模块"></a>Ansible的cron模块</h2>
       
     </div>
     
@@ -452,8 +584,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/23/网络协议-DHCP协议/" rel="next" title="网络协议--DHCP协议">
-                <i class="fa fa-chevron-left"></i> 网络协议--DHCP协议
+              <a href="/2017/08/26/rsyncDeamon模式配置过程/" rel="next" title="rsyncDeamon模式配置过程">
+                <i class="fa fa-chevron-left"></i> rsyncDeamon模式配置过程
               </a>
             
           </div>
@@ -461,10 +593,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/25/rsync详细笔记/" rel="prev" title="rsync详细笔记">
-                rsync详细笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -598,8 +726,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Ansible的入门实践 
-</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ansible的基础模块"><span class="nav-number">1.</span> <span class="nav-text">Ansible的基础模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的command模块"><span class="nav-number">1.1.</span> <span class="nav-text">Ansible的command模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的copy模块"><span class="nav-number">1.2.</span> <span class="nav-text">Ansible的copy模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的shell模块"><span class="nav-number">1.3.</span> <span class="nav-text">Ansible的shell模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的scripts模块"><span class="nav-number">1.4.</span> <span class="nav-text">Ansible的scripts模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的file模块"><span class="nav-number">1.5.</span> <span class="nav-text">Ansible的file模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ansible的cron模块"><span class="nav-number">1.6.</span> <span class="nav-text">Ansible的cron模块</span></a></li></ol></li></ol></div>
             
 
           </div>
